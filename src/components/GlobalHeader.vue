@@ -67,10 +67,10 @@ const items = ref<MenuProps['items']>([
     title: '主页' /*鼠标移入时显示的文字*/
   },
   {
-    key: '/about',
-    icon: () => h(HomeOutlined),
-    label: '关于',
-    title: '关于'
+    key: '/admin/userManage',
+    // icon: () => h(HomeOutlined),
+    label: '用户管理',
+    title: '用户管理'
   },
   {
     key: 'others',
@@ -96,6 +96,7 @@ router.afterEach((to, from, next) => {
   current.value = [to.path]
 })
 
+//用户注销
 const doLogout = async () => {
   const res = await userLogoutUsingPost()
   console.log(res)
