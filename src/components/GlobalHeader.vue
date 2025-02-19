@@ -22,8 +22,22 @@
       <a-col flex="120px">
         <div class="user-login-status">
           <div v-if="loginUserStore.loginUser.id">
-            {{ loginUserStore.loginUser.userName ?? '无名' }}
-            <!--若用户有id，则取出用户名，若用户名为空，则给一个降级逻辑，展示"无名"-->
+            <a-dropdown>
+              <ASpace>
+                <a-avatar :src="loginUserStore.loginUser.userAvatar" />
+                {{ loginUserStore.loginUser.userName ?? '无名' }}
+                <!--  ??:若前面有值就用前面的值，否则就用后面的值   -->
+              </ASpace>
+              <template #overlay>
+                <a-menu>
+                  <a-menu-item @click="doLogout">
+                    //todo 这里的图标出不来
+                    <LogoutOutlined />
+                    退出登录
+                  </a-menu-item>
+                </a-menu>
+              </template>
+            </a-dropdown>
           </div>
           <div v-else>
             <a-button type="primary" href="/user/login">登录</a-button>
@@ -35,11 +49,13 @@
 </template>
 
 <script lang="ts" setup>
+import { DownOutlined } from '@ant-design/icons-vue';
 import { h, ref } from 'vue'
 import { HomeOutlined } from '@ant-design/icons-vue'
-import { MenuProps } from 'ant-design-vue'
+import { MenuProps, message } from 'ant-design-vue'
 import { useRouter } from 'vue-router'
 import { useLoginUserStore } from '@/stores/useLoginUserStore.ts'
+import { userLogoutUsingPost } from '@/api/userController.ts'
 
 //引入全局状态
 const loginUserStore = useLoginUserStore()
@@ -49,19 +65,19 @@ const items = ref<MenuProps['items']>([
     key: '/',
     icon: () => h(HomeOutlined),
     label: '主页',
-    title: '主页' /*鼠标移入时显示的文字*/,
+    title: '主页' /*鼠标移入时显示的文字*/
   },
   {
     key: '/about',
     icon: () => h(HomeOutlined),
     label: '关于',
-    title: '关于',
+    title: '关于'
   },
   {
     key: 'others',
     label: h('a', { href: 'https://www.baidu.com', target: '_blank' }, '百度'),
-    title: '百度',
-  },
+    title: '百度'
+  }
 ])
 
 //拿到跳转的router对象
@@ -69,7 +85,7 @@ const router = useRouter()
 //理由跳转事件
 const doMenuClick = ({ key }) => {
   router.push({
-    path: key,
+    path: key
   })
 }
 
@@ -80,6 +96,23 @@ const current = ref<string[]>([])
 router.afterEach((to, from, next) => {
   current.value = [to.path]
 })
+
+const doLogout = async () => {
+  const res = await userLogoutUsingPost()
+  console.log(res)
+  if (res.data.code === 0) {
+    //如果注销成功，则清除用户的登录态
+    loginUserStore.setLoginUser({
+      userName: '未登录'
+    })
+    message.success('退出登录成功')
+    router.push({
+      path: '/user/login'
+    })
+  } else {
+    message.error('退出登录失败' + res.data.message)
+  }
+}
 </script>
 
 <style scoped>
