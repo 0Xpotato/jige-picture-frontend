@@ -31,7 +31,6 @@
               <template #overlay>
                 <a-menu>
                   <a-menu-item @click="doLogout">
-<!--                    todo 这里的图标出不来-->
                     <LogoutOutlined />
                     退出登录
                   </a-menu-item>
@@ -49,9 +48,9 @@
 </template>
 
 <script lang="ts" setup>
-import { DownOutlined } from '@ant-design/icons-vue';
+//记得要引入图标
+import { HomeOutlined, LogoutOutlined } from '@ant-design/icons-vue'
 import { h, ref } from 'vue'
-import { HomeOutlined } from '@ant-design/icons-vue'
 import { MenuProps, message } from 'ant-design-vue'
 import { useRouter } from 'vue-router'
 import { useLoginUserStore } from '@/stores/useLoginUserStore.ts'
@@ -101,7 +100,7 @@ const doLogout = async () => {
   const res = await userLogoutUsingPost()
   console.log(res)
   if (res.data.code === 0) {
-    //如果注销成功，则清除用户的登录态
+    //如果注销成功，则将用户的名称重置为未登录
     loginUserStore.setLoginUser({
       userName: '未登录'
     })
