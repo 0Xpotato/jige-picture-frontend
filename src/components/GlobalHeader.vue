@@ -48,9 +48,9 @@
 </template>
 
 <script lang="ts" setup>
-//记得要引入图标
+//                      记得要引入图标
 import { HomeOutlined, LogoutOutlined } from '@ant-design/icons-vue'
-import { h, ref } from 'vue'
+import { computed, h, ref } from 'vue'
 import { MenuProps, message } from 'ant-design-vue'
 import { useRouter } from 'vue-router'
 import { useLoginUserStore } from '@/stores/useLoginUserStore.ts'
@@ -59,7 +59,7 @@ import { userLogoutUsingPost } from '@/api/userController.ts'
 //引入全局状态
 const loginUserStore = useLoginUserStore()
 
-const items = ref<MenuProps['items']>([
+const originItems = [
   {
     key: '/',
     icon: () => h(HomeOutlined),
@@ -77,7 +77,25 @@ const items = ref<MenuProps['items']>([
     label: h('a', { href: 'https://www.baidu.com', target: '_blank' }, '百度'),
     title: '百度'
   }
-])
+]
+
+
+// 过滤菜单项
+const filterMenus = (menus = [] as MenuProps['items']) => {
+  return menus?.filter((menu) => {
+    if (menu.key.startsWith('/admin')) {
+      const loginUser = loginUserStore.loginUser
+      if (!loginUser || loginUser.userRole !== 'admin') {
+        return false
+      }
+    }
+    return true
+  })
+}
+
+// 展示在菜单的路由数组
+const items = computed<MenuProps['items']>(() => filterMenus(originItems))
+
 
 //拿到跳转的router对象
 const router = useRouter()

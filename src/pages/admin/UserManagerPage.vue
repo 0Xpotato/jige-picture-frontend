@@ -3,11 +3,19 @@
     <!--    搜索框-->
     <a-form layout="inline" :model="searchParams" @finish="doSearch" class="search">
       <a-form-item label="账号">
-        <a-input v-model:value="searchParams.userAccount" placeholder="输入账号">
+        <a-input v-model:value="searchParams.userAccount" placeholder="输入账号" allow-clear>
         </a-input>
       </a-form-item>
       <a-form-item label="用户名">
-        <a-input v-model:value="searchParams.userName" placeholder="输入用户名">
+        <a-input v-model:value="searchParams.userName" placeholder="输入用户名" allow-clear>
+        </a-input>
+      </a-form-item>
+      <a-form-item label="用户简介">
+        <a-input v-model:value="searchParams.userProfile" placeholder="输入用户简介" allow-clear>
+        </a-input>
+      </a-form-item>
+      <a-form-item label="用户角色">
+        <a-input v-model:value="searchParams.userRole" placeholder="输入用户用户角色" allow-clear>
         </a-input>
       </a-form-item>
       <a-form-item>
@@ -69,7 +77,7 @@ const columns = [
     dataIndex: 'userProfile'
   },
   {
-    title: '用户角色',
+    title: '用户角色(admin/user)',
     dataIndex: 'userRole'
   },
   {

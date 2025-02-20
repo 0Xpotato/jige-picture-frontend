@@ -6,11 +6,13 @@
 
 <script setup lang="ts">
 import BasicLayout from '@/layouts/BasicLayout.vue'
+
+
 // import { healthUsingGet } from '@/api/mainController.ts'
 import { useLoginUserStore } from '@/stores/useLoginUserStore.ts'
 
-const loginUserStore = useLoginUserStore()
-loginUserStore.fetchLoginUser()
+/*const loginUserStore = useLoginUserStore()
+loginUserStore.fetchLoginUser()*/
 /*loginUserStore.setLoginUser("鸡哥已登录")
 console.log(loginUserStore.loginUser)*/
 // console.log(loginUserStore.loginUser)
@@ -18,6 +20,8 @@ console.log(loginUserStore.loginUser)*/
 /*healthUsingGet().then((res) => {
   console.log(res)
 })*/
+
+
 </script>
 
 <style scoped>
