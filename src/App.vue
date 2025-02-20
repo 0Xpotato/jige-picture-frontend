@@ -6,7 +6,7 @@
 
 <script setup lang="ts">
 import BasicLayout from '@/layouts/BasicLayout.vue'
-import { healthUsingGet } from '@/api/mainController.ts'
+// import { healthUsingGet } from '@/api/mainController.ts'
 import { useLoginUserStore } from '@/stores/useLoginUserStore.ts'
 
 const loginUserStore = useLoginUserStore()
@@ -15,9 +15,9 @@ loginUserStore.fetchLoginUser()
 console.log(loginUserStore.loginUser)*/
 // console.log(loginUserStore.loginUser)
 
-healthUsingGet().then((res) => {
+/*healthUsingGet().then((res) => {
   console.log(res)
-})
+})*/
 </script>
 
 <style scoped>
