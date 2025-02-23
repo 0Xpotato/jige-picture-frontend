@@ -23,6 +23,18 @@ declare namespace API {
     message?: string
   }
 
+  type BaseResponsePictureTagCategory_ = {
+    code?: number
+    data?: PictureTagCategory
+    message?: string
+  }
+
+  type BaseResponsePictureVO_ = {
+    code?: number
+    data?: PictureVO
+    message?: string
+  }
+
   type BaseResponseString_ = {
     code?: number
     data?: string
@@ -73,6 +85,55 @@ declare namespace API {
     records?: UserVO[]
     size?: number
     total?: number
+  }
+
+  type PictureEditRequest = {
+    category?: string
+    id?: number
+    introduction?: string
+    name?: string
+    tags?: string[]
+  }
+
+  type PictureTagCategory = {
+    categoryList?: string[]
+    tagList?: string[]
+  }
+
+  type PictureUpdateRequest = {
+    category?: string
+    id?: number
+    introduction?: string
+    name?: string
+    tags?: string[]
+  }
+
+  type PictureVO = {
+    category?: string
+    createTime?: string
+    editTime?: string
+    id?: number
+    introduction?: string
+    name?: string
+    picFormat?: string
+    picHeight?: number
+    picScale?: number
+    picSize?: number
+    picWidth?: number
+    tags?: string[]
+    updateTime?: string
+    url?: string
+    user?: UserVO
+    userId?: number
+  }
+
+  type testDownloadFileUsingGETParams = {
+    /** filepath */
+    filepath?: string
+  }
+
+  type uploadPictureUsingPOSTParams = {
+    id?: number
   }
 
   type User = {
