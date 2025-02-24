@@ -79,7 +79,7 @@ const originItems = [
   {
     key: '/admin/pictureManage',
     label: '图片管理',
-    title: 'PictureManagePage'
+    title: '图片管理'
   },
   {
     key: 'others',
