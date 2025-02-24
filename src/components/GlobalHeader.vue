@@ -6,7 +6,7 @@
         <router-link to="/">
           <div class="title-bar">
             <!--图标和标题，名字随意取-->
-            <img src="../assets/logo.ico" alt="logo" class="logo" />
+            <img alt="logo" class="logo" src="../assets/logo.ico" />
             <div class="title">鸡哥云图库</div>
           </div>
         </router-link>
@@ -14,8 +14,8 @@
       <a-col flex="auto">
         <a-menu
           v-model:selectedKeys="current"
-          mode="horizontal"
           :items="items"
+          mode="horizontal"
           @click="doMenuClick"
         />
       </a-col>
@@ -39,7 +39,7 @@
             </a-dropdown>
           </div>
           <div v-else>
-            <a-button type="primary" href="/user/login">登录</a-button>
+            <a-button href="/user/login" type="primary">登录</a-button>
           </div>
         </div>
       </a-col>
@@ -75,6 +75,11 @@ const originItems = [
     key: '/add_picture',
     label: '创建图片',
     title: '创建图片'
+  },
+  {
+    key: '/admin/pictureManage',
+    label: '图片管理',
+    title: 'PictureManagePage'
   },
   {
     key: 'others',
