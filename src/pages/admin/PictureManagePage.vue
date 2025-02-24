@@ -1,8 +1,8 @@
 <template>
   <div id="pictureManagePage">
-    <a-flex justify="space-between" class="header">
+    <a-flex class="header" justify="space-between">
       <h2 style="font-weight: revert">图片管理</h2>
-      <a-button type="primary" target="_self" href="/add_picture">+ 创建图片</a-button>
+      <a-button href="/add_picture" target="_self" type="primary">+ 创建图片</a-button>
     </a-flex>
 
     <!-- 搜索表单 -->
@@ -36,15 +36,15 @@
           <a-image :src="record.url" :width="110" />
         </template>
         <template v-if="column.dataIndex === 'tags'">
-          <a-tag v-for="tag in JSON.parse(record.tags || '[]')" :key="tag" style="color: orange">{{tag}}</a-tag>
+          <a-tag v-for="tag in JSON.parse(record.tags || '[]')" :key="tag" style="color: orange">{{ tag }}</a-tag>
         </template>
         <!-- 图片信息 -->
         <template v-if="column.dataIndex==='picInfo'">
-          <div>格式：{{record.picFormat}}</div>
-          <div>宽度：{{record.picWidth}}</div>
-          <div>高度：{{record.picHeight}}</div>
-          <div>宽高比：{{record.picScale}}</div>
-          <div>大小：{{(record.picSize/1024).toFixed(2)}}KB</div>
+          <div>格式：{{ record.picFormat }}</div>
+          <div>宽度：{{ record.picWidth }}</div>
+          <div>高度：{{ record.picHeight }}</div>
+          <div>宽高比：{{ record.picScale }}</div>
+          <div>大小：{{ (record.picSize / 1024).toFixed(2) }}KB</div>
         </template>
         <template v-else-if="column.dataIndex === 'createTime'">
           {{ dayjs(record.createTime).format('YYYY-MM-DD HH:mm:ss') }}
@@ -53,7 +53,9 @@
           {{ dayjs(record.editTime).format('YYYY-MM-DD HH:mm:ss') }}
         </template>
         <template v-else-if="column.key==='action'">
-          <a-button danger @click="doDelete(record.id)">删除</a-button>
+          <a-button type="link" :href="`/add_picture?id=${record.id}`" link style="color: lightgreen" target="_blank">编辑
+          </a-button>
+          <a-button danger type="link" @click="doDelete(record.id)">删除</a-button>
         </template>
       </template>
     </a-table>
@@ -70,50 +72,50 @@ const columns = [
   {
     title: 'id',
     dataIndex: 'id',
-    width: 80,
+    width: 80
   },
   {
     title: '图片',
-    dataIndex: 'url',
+    dataIndex: 'url'
   },
   {
     title: '名称',
-    dataIndex: 'name',
+    dataIndex: 'name'
   },
   {
     title: '简介',
     dataIndex: 'introduction',
-    ellipsis: true,
+    ellipsis: true
   },
   {
     title: '类型',
-    dataIndex: 'category',
+    dataIndex: 'category'
   },
   {
     title: '标签',
-    dataIndex: 'tags',
+    dataIndex: 'tags'
   },
   {
     title: '图片信息',
-    dataIndex: 'picInfo',
+    dataIndex: 'picInfo'
   },
   {
     title: '用户 id',
     dataIndex: 'userId',
-    width: 80,
+    width: 80
   },
   {
     title: '创建时间',
-    dataIndex: 'createTime',
+    dataIndex: 'createTime'
   },
   {
     title: '编辑时间',
-    dataIndex: 'editTime',
+    dataIndex: 'editTime'
   },
   {
     title: '操作',
-    key: 'action',
-  },
+    key: 'action'
+  }
 ]
 
 //数据
@@ -201,7 +203,7 @@ const doDelete = async (id: string) => {
   margin-bottom: 80px;
 }
 
-.header{
+.header {
   margin-bottom: 16px;
 
 }
