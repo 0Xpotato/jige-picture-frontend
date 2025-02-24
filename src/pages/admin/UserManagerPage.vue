@@ -101,10 +101,10 @@ const searchParams = reactive<API.UserQueryRequest>({
 
 //搜索事件
 const doSearch = () => {
-  //获取数据
-  fetchData()
   //重置页码
   searchParams.current = 1
+  //获取数据
+  fetchData()
 }
 
 //删除数据
