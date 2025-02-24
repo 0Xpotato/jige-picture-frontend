@@ -1,28 +1,28 @@
 <template>
   <div id="picture-upload">
-    <a-upload
-      list-type="picture-card"
-      :show-upload-list="false"
-      :custom-request="handleUpload"
-      :before-upload="beforeUpload"
-    >
-      <img v-if="picture?.url" :src="picture?.url" alt="avatar">
-      <div v-else>
-        <loading-outlined v-if="loading"></loading-outlined>
-        <plus-outlined v-else></plus-outlined>
-        <div class="ant-upload-text">点击或拖拽上传图片</div>
-      </div>
-    </a-upload>
+  <a-upload
+    list-type="picture-card"
+    :show-upload-list="false"
+    :custom-request="handleUpload"
+    :before-upload="beforeUpload"
+  >
+    <img v-if="picture?.url" :src="picture?.url" alt="avatar" style="max-width: 720px;max-height: 720px"/>
+    <div v-else>
+      <loading-outlined v-if="loading"></loading-outlined>
+      <plus-outlined v-else></plus-outlined>
+      <div class="ant-upload-text">点击或拖拽上传图片</div>
+    </div>
+  </a-upload>
   </div>
 </template>
-
 <script lang="ts" setup>
-
-import { Props } from 'ant-design-vue/es/form/useForm'
 import { ref } from 'vue'
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons-vue'
 import type { UploadProps } from 'ant-design-vue'
 import { message } from 'ant-design-vue'
+import { uploadPictureUsingPost } from '@/api/pictureController.ts'
+
+const loading = ref<boolean>(false);
 
 interface Props {
   picture?: API.PictureVO
@@ -34,7 +34,7 @@ const props = defineProps<Props>()
 const beforeUpload = (file: UploadProps['fileList'][number]) => {
   const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png'
   if (!isJpgOrPng) {
-    message.error('不支持上传该格式的图片，推荐jpg或png')
+    message.error('不支持上传该格式的图片，推荐 jpg 或 png')
   }
   const isLt2M = file.size / 1024 / 1024 <= 2
   if (!isLt2M) {
@@ -43,7 +43,6 @@ const beforeUpload = (file: UploadProps['fileList'][number]) => {
   return isJpgOrPng && isLt2M
 }
 
-const loading = ref<boolean>(false)
 
 /**
  * 上传
@@ -52,14 +51,14 @@ const loading = ref<boolean>(false)
 const handleUpload = async ({ file }: any) => {
   loading.value = true
   try {
-    const params = props.picture ? { id: props.picture.id } : {}
+    const params = props.picture ? { id: props.picture.id } : {};
     const res = await uploadPictureUsingPost(params, {}, file)
     if (res.data.code === 0 && res.data.data) {
       message.success('图片上传成功')
-      //将上传成功的图片信息传递给父组件
+      // 将上传成功的图片信息传递给父组件
       props.onSuccess?.(res.data.data)
     } else {
-      message.error('图片上传失败' + res.data.message)
+      message.error('图片上传失败，' + res.data.message)
     }
   } catch (error) {
     message.error('图片上传失败')
@@ -68,7 +67,6 @@ const handleUpload = async ({ file }: any) => {
   }
 }
 
-const params = props.picture ? { id: props.picture.id } : {}
 
 </script>
 
