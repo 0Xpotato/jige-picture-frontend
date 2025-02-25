@@ -52,10 +52,10 @@ const router = createRouter({
       component: AddPicturePage
     },
     {
-      path:'/picture/:id',
-      name:"图片详情",
-      component:PictureDetailPage,
-      props:true,
+      path: '/picture/:id',
+      name: '图片详情',
+      component: PictureDetailPage,
+      props: true
     }
 
   ]
