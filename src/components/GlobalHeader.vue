@@ -80,12 +80,13 @@ const originItems = [
     key: '/admin/pictureManage',
     label: '图片管理',
     title: '图片管理'
-  },
+  }
+  /*,
   {
     key: 'others',
     label: h('a', { href: 'https://www.baidu.com', target: '_blank' }, '百度'),
     title: '百度'
-  }
+  }*/
 ]
 
 
