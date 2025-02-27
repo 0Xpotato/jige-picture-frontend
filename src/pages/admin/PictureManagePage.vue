@@ -11,15 +11,16 @@
         <a-input v-model:value="searchParams.searchText" allow-clear placeholder="从名称和简介搜索">
         </a-input>
       </a-form-item>
-      <a-form-item label="类型">
+      <a-form-item label="类型" name="category">
         <a-input v-model:value="searchParams.category" allow-clear placeholder="输入图片类型">
         </a-input>
       </a-form-item>
-      <a-form-item label="标签">
-        <a-input v-model:value="searchParams.tags" allow-clear placeholder="输入图片标签">
-        </a-input>
+      <a-form-item label="标签" name="tags">
+        <a-select v-model:value="searchParams.tags" allow-clear mode="tags" placeholder="输入图片标签"
+                  style="min-width: 180px">
+        </a-select>
       </a-form-item>
-      <a-form-item label="用户id">
+      <a-form-item label="用户id" name="userId">
         <a-input v-model:value="searchParams.userId" allow-clear placeholder="输入用户id">
         </a-input>
       </a-form-item>
@@ -35,7 +36,7 @@
       </a-form-item>
     </a-form>
     <!-- 表格 -->
-    <a-table :columns="columns" :data-source="dataList" :pagination class="table" @change="doTableChange">
+    <a-table :columns="columns" :data-source="dataList" :pagination="pagination" class="table" @change="doTableChange">
       <template #bodyCell="{ column, record }">
         <template v-if="column.dataIndex === 'url'">
           <a-image :src="record.url" :width="110" />
@@ -53,10 +54,10 @@
         </template>
         <!-- 审核信息 -->
         <template v-if="column.dataIndex==='reviewMessage'">
-          <div>审核状态：{{ record.reviewStatus }}</div>
+          <div>审核状态：{{ PIC_REVIEW_STATUS_MAP[record.reviewStatus] }}</div>
           <div>审核人：{{ record.reviewerId }}</div>
           <div>审核信息：{{ record.reviewMessage }}</div>
-          <div>审核时间：{{ dayjs(record.reviewTime).format('YYYY-MM-DD HH:mm:ss') }}</div>
+          <div v-if="record.reviewTime">审核时间：{{ dayjs(record.reviewTime).format('YYYY-MM-DD HH:mm:ss') }}</div>
         </template>
         <template v-else-if="column.dataIndex === 'createTime'">
           {{ dayjs(record.createTime).format('YYYY-MM-DD HH:mm:ss') }}
@@ -95,7 +96,7 @@ import {
 } from '@/api/pictureController.ts'
 import { message } from 'ant-design-vue'
 import dayjs from 'dayjs'
-import { PIC_REVIEW_STATUS_ENUM, PIC_REVIEW_STATUS_OPTIONS } from '@/constants/picture.ts'
+import { PIC_REVIEW_STATUS_ENUM, PIC_REVIEW_STATUS_MAP, PIC_REVIEW_STATUS_OPTIONS } from '@/constants/picture.ts'
 
 const columns = [
   {
@@ -152,13 +153,15 @@ const columns = [
 ]
 
 //数据
-const dataList = ref<API.PictureVO>([])
+const dataList = ref([])
 const total = ref(0)
 
 //搜索条件
 const searchParams = reactive<API.PictureQueryRequest>({
   current: 1,
-  pageSize: 10
+  pageSize: 10,
+  sortField: 'createTime',
+  sortOrder: 'descend'
 })
 
 //分页参数
@@ -214,14 +217,15 @@ const doTableChange = (page: any) => {
 
 //删除数据
 const doDelete = async (id: string) => {
-  if (!id) {
+  if (id == null) {
+    message.error('id 为空')
     return
   }
   const res = await deletePictureUsingPost({ id })
   if (res.data.code === 0) {
-    message.success('删除成功')
     //刷新数据
     await fetchData()
+    message.success('删除成功')
   } else {
     message.error('删除失败')
   }
@@ -234,7 +238,7 @@ const handleReview = async (record: API.Picture, reviewStatus: number) => {
   const res = await doPictureReviewUsingPost({
     id: record.id,
     reviewStatus,
-    reviewMessage,
+    reviewMessage
   })
   if (res.data.code === 0) {
     message.success('审核操作成功')
