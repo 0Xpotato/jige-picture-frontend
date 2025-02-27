@@ -8,7 +8,8 @@
         <router-view />
       </a-layout-content>
       <a-layout-footer class="footer">
-        <a href="https://www.baidu.com">鸡哥智能协同云图库 by 程序员鸡哥</a>
+<!--        <a href="https://www.baidu.com">鸡哥智能协同云图库 by 程序员鸡哥</a>-->
+        <a type="link">鸡哥智能协同云图库 by 程序员鸡哥</a>
       </a-layout-footer>
     </a-layout>
   </div>
