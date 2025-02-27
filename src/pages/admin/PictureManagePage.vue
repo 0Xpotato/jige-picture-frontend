@@ -54,10 +54,12 @@
         </template>
         <!-- 审核信息 -->
         <template v-if="column.dataIndex==='reviewMessage'">
-          <div>审核状态：{{ PIC_REVIEW_STATUS_MAP[record.reviewStatus] }}</div>
-          <div>审核人：{{ record.reviewerId }}</div>
-          <div>审核信息：{{ record.reviewMessage }}</div>
-          <div v-if="record.reviewTime">审核时间：{{ dayjs(record.reviewTime).format('YYYY-MM-DD HH:mm:ss') }}</div>
+          <div class="reviewInfo" style="color: red">审核状态：{{ PIC_REVIEW_STATUS_MAP[record.reviewStatus] }}</div>
+          <div class="reviewInfo">审核人：{{ record.reviewerId }}</div>
+          <div class="reviewInfo">审核信息：{{ record.reviewMessage }}</div>
+          <div v-if="record.reviewTime" class="reviewInfo">
+            审核时间：{{ dayjs(record.reviewTime).format('YYYY-MM-DD HH:mm:ss') }}
+          </div>
         </template>
         <template v-else-if="column.dataIndex === 'createTime'">
           {{ dayjs(record.createTime).format('YYYY-MM-DD HH:mm:ss') }}
@@ -216,20 +218,19 @@ const doTableChange = (page: any) => {
 }
 
 //删除数据
-const doDelete = async (id: string) => {
+const doDelete = async (id: number) => {
   if (id == null) {
     message.error('id 为空')
     return
   }
   const res = await deletePictureUsingPost({ id })
-  if (res.data.code === 0) {
+  if (res.data.code === 0 && res.data.data) {
     //刷新数据
-    await fetchData()
     message.success('删除成功')
+    await fetchData()
   } else {
-    message.error('删除失败')
+    message.error('删除失败' + res.data.message)
   }
-
 }
 
 //图片审核
@@ -263,5 +264,9 @@ const handleReview = async (record: API.Picture, reviewStatus: number) => {
 
 .search {
   margin-bottom: 16px;
+}
+
+.reviewInfo {
+  font-size: 12px;
 }
 </style>
