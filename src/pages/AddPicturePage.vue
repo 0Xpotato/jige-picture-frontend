@@ -3,7 +3,16 @@
     <h2 style="margin-bottom: 16px">
       {{ route.query?.id ? '修改图片' : '创建图片' }}
     </h2>
-    <PictureUpload :onSuccess="onSuccess" :picture="picture" />
+    <!--选择输入框-->
+    <a-tabs v-model:activeKey="uploadType">
+      <a-tab-pane key="file" tab="文件上传">
+        <PictureUpload :onSuccess="onSuccess" :picture="picture" />
+      </a-tab-pane>
+      <a-tab-pane key="url" force-render tab="URL 上传">
+        <UrlPictureUpload :on-success="onSuccess" :picture="picture" />
+      </a-tab-pane>
+
+    </a-tabs>
     <!--    输入框-->
     <a-form
       v-if="picture"
@@ -67,6 +76,7 @@ import {
 } from '@/api/pictureController.ts'
 import { message } from 'ant-design-vue'
 import { useRoute, useRouter } from 'vue-router'
+import UrlPictureUpload from '@/components/UrlPictureUpload.vue'
 
 
 const picture = ref<API.PictureVO>()
@@ -154,6 +164,8 @@ const getOldPicture = async () => {
 onMounted(() => {
   getOldPicture()
 })
+
+const uploadType=ref<'file' | 'url'>('file')
 </script>
 <style>
 #addPicturePage {
