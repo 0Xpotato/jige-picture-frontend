@@ -171,6 +171,21 @@ export async function uploadPictureUsingPost(
   })
 }
 
+/** uploadPictureByBatch POST /api/upload/batch */
+export async function uploadPictureByBatchUsingPost(
+  body: API.PictureUploadByBatchRequest,
+  options?: { [key: string]: any }
+) {
+  return request<API.BaseResponseInt_>('/api/upload/batch', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: body,
+    ...(options || {}),
+  })
+}
+
 /** uploadPictureByUrl POST /api/upload/url */
 export async function uploadPictureByUrlUsingPost(
   body: API.PictureUploadRequest,

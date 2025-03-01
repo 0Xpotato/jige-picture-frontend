@@ -178,7 +178,7 @@ onMounted(() => {
 
 <style scoped>
 #homePage {
-  margin-bottom: 16px;
+  margin-bottom: 64px;
 }
 
 #homePage .search-bar {
