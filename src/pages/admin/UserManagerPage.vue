@@ -15,7 +15,7 @@
         </a-input>
       </a-form-item>
       <a-form-item label="用户角色">
-        <a-input v-model:value="searchParams.userRole" placeholder="输入用户用户角色" allow-clear>
+        <a-input v-model:value="searchParams.userRole" allow-clear placeholder="输入用户角色">
         </a-input>
       </a-form-item>
       <a-form-item>
@@ -56,7 +56,7 @@ import dayjs from 'dayjs'
 
 const columns = [
   {
-    name: 'id',
+    title: 'id',
     dataIndex: 'id'
   },
   {
