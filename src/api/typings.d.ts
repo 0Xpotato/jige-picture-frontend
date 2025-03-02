@@ -71,6 +71,12 @@ declare namespace API {
     message?: string
   }
 
+  type BaseResponseUserRole_ = {
+    code?: number
+    data?: UserRole
+    message?: string
+  }
+
   type BaseResponseUserVO_ = {
     code?: number
     data?: UserVO
@@ -296,6 +302,10 @@ declare namespace API {
     checkPassword?: string
     userAccount?: string
     userPassword?: string
+  }
+
+  type UserRole = {
+    userRoleList?: string[]
   }
 
   type UserUpdateRequest = {

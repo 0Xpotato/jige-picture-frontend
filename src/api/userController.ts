@@ -134,3 +134,11 @@ export async function updateUserUsingPost(
     ...(options || {}),
   })
 }
+
+/** listUserRole GET /api/user/userRole */
+export async function listUserRoleUsingGet(options?: { [key: string]: any }) {
+  return request<API.BaseResponseUserRole_>('/api/user/userRole', {
+    method: 'GET',
+    ...(options || {}),
+  })
+}

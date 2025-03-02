@@ -80,7 +80,7 @@
                       type="link" @click="handleReview(record,PIC_REVIEW_STATUS_ENUM.REJECT)">
               拒绝
             </a-button>
-            <a-button :href="`/add_picture?id=${record.id}`" link style="color: lightgreen" target="_blank" type="link">
+            <a-button :href="`/add_picture?id=${record.id}`" link style="color: lightgreen" target="_self" type="link">
               编辑
             </a-button>
             <a-button danger type="link" @click="doDelete(record.id)">
