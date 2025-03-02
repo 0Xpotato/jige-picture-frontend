@@ -45,7 +45,6 @@
       </a-form-item>
     </a-form>
   </div>
-
 </template>
 <script lang="ts" setup>
 
@@ -60,6 +59,9 @@ const formData = reactive<API.PictureUploadRequest>({
 })
 const loading = ref<boolean>(false)
 
+/**
+ * 定义表单提交的函数方法
+ */
 const handleSubmit = async () => {
   loading.value = true
   const res = await uploadPictureByBatchUsingPost({
@@ -71,7 +73,7 @@ const handleSubmit = async () => {
       path: '/'
     })
   } else {
-    message.error('批量创建失败'+res.data.message)
+    message.error('批量创建失败' + res.data.message)
   }
   loading.value = false
 }
