@@ -4,7 +4,7 @@
       <h2 style="font-weight: revert">图片管理</h2>
       <a-space>
         <a-button href="/add_picture" target="_self" type="primary">+ 创建图片</a-button>
-        <a-button ghost href="/add_picture/batch" target="_blank" type="primary">+ 批量创建图片</a-button>
+        <a-button ghost href="/add_picture/batch" target="_self" type="primary">+ 批量创建图片</a-button>
       </a-space>
     </a-flex>
 
