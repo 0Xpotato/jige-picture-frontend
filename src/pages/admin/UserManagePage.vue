@@ -1,17 +1,17 @@
 <template>
   <div id="userManagerPage">
     <!--    搜索框-->
-    <a-form layout="inline" :model="searchParams" @finish="doSearch" class="search">
+    <a-form :model="searchParams" class="search" layout="inline" @finish="doSearch">
       <a-form-item label="账号">
-        <a-input v-model:value="searchParams.userAccount" placeholder="输入账号" allow-clear>
+        <a-input v-model:value="searchParams.userAccount" allow-clear placeholder="输入账号">
         </a-input>
       </a-form-item>
       <a-form-item label="用户名">
-        <a-input v-model:value="searchParams.userName" placeholder="输入用户名" allow-clear>
+        <a-input v-model:value="searchParams.userName" allow-clear placeholder="输入用户名">
         </a-input>
       </a-form-item>
       <a-form-item label="用户简介">
-        <a-input v-model:value="searchParams.userProfile" placeholder="输入用户简介" allow-clear>
+        <a-input v-model:value="searchParams.userProfile" allow-clear placeholder="输入用户简介">
         </a-input>
       </a-form-item>
       <a-form-item label="用户角色">
@@ -19,13 +19,13 @@
         </a-input>
       </a-form-item>
       <a-form-item>
-        <a-button type="primary" html-type="submit">
+        <a-button html-type="submit" type="primary">
           搜索
         </a-button>
       </a-form-item>
     </a-form>
     <!--    表格-->
-    <a-table :columns="columns" :data-source="dataList" :pagination @change="doTableChange" class="table">
+    <a-table :columns="columns" :data-source="dataList" :pagination class="table" @change="doTableChange">
       <template #bodyCell="{ column, record }">
         <template v-if="column.dataIndex === 'userAvatar'">
           <a-image :src="record.userAvatar" :width="110" />
@@ -39,10 +39,17 @@
           </div>
         </template>
         <template v-else-if="column.dataIndex === 'createTime'">
-          {{ dayjs(record.createTime).format('YYYY-MM-DD HH:mm:ss') }}
+          <a-space>
+            <div>
+              {{ dayjs(record.createTime).format('YYYY-MM-DD') }}
+            </div>
+            <div style="color: blue">
+              {{ dayjs(record.createTime).format('HH:mm:ss') }}
+            </div>
+          </a-space>
         </template>
         <template v-else-if="column.key==='action'">
-          <a-button :href="`/user/update?id=${record.id}`" ghost target="_self" type="link" >编辑</a-button>
+          <a-button :href="`/user/update?id=${record.id}`" ghost target="_self" type="link">编辑</a-button>
           <a-button danger @click="doDelete(record.id)">删除</a-button>
         </template>
       </template>
@@ -131,7 +138,7 @@ const pagination = computed(() => {
     pageSize: searchParams.pageSize ?? 10,
     total: total.value,
     showSizeChanger: true,
-    showQuickJumper:true,
+    showQuickJumper: true,
     /*    showTotal: (total) => {
           return `共${total}条`
         }*/

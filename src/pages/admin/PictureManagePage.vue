@@ -65,10 +65,24 @@
           </div>
         </template>
         <template v-else-if="column.dataIndex === 'createTime'">
-          {{ dayjs(record.createTime).format('YYYY-MM-DD HH:mm:ss') }}
+          <a-space>
+            <div>
+              {{ dayjs(record.createTime).format('YYYY-MM-DD') }}
+            </div>
+            <div style="color: blue">
+              {{ dayjs(record.createTime).format('HH:mm:ss') }}
+            </div>
+          </a-space>
         </template>
         <template v-else-if="column.dataIndex === 'editTime'">
-          {{ dayjs(record.editTime).format('YYYY-MM-DD HH:mm:ss') }}
+          <a-space>
+            <div>
+              {{ dayjs(record.editTime).format('YYYY-MM-DD') }}
+            </div>
+            <div style="color: blue">
+              {{ dayjs(record.editTime).format('HH:mm:ss') }}
+            </div>
+          </a-space>
         </template>
         <template v-else-if="column.key==='action'">
           <a-space wrap>
