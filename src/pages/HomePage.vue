@@ -133,6 +133,7 @@ const pagination = computed(() => {
     pageSize: searchParams.pageSize,
     total: total.value,
     showSizeChanger: false,      /*当展示数据大于50条时，不展示切换每页条数的复选框*/
+    showQuickJumper: true,       /*可以快速跳转至某页*/
     onChange: (page: number, pageSize: number) => {
       searchParams.current = page
       searchParams.pageSize = pageSize

@@ -131,6 +131,7 @@ const pagination = computed(() => {
     pageSize: searchParams.pageSize ?? 10,
     total: total.value,
     showSizeChanger: true,
+    showQuickJumper:true,
     /*    showTotal: (total) => {
           return `共${total}条`
         }*/
