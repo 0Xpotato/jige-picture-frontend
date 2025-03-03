@@ -42,7 +42,7 @@
     <a-table :columns="columns" :data-source="dataList" :pagination="pagination" class="table" @change="doTableChange">
       <template #bodyCell="{ column, record }">
         <template v-if="column.dataIndex === 'url'">
-          <a-image :src="record.url" :width="110" />
+          <a-image :height="110" :src="record.url" :width="110"/>
         </template>
         <template v-if="column.dataIndex === 'tags'">
           <a-tag v-for="tag in JSON.parse(record.tags || '[]')" :key="tag" style="color: orange">{{ tag }}</a-tag>
@@ -153,6 +153,7 @@ const columns = [
   },
   {
     title: '操作',
+    width: 120,
     key: 'action'
   }
 ]

@@ -43,10 +43,10 @@
           <a-card hoverable @click="doClickPicture(picture)">
             <template #cover>
               <img
-                style="height: 180px; object-fit: cover"
                 :alt="picture.name"
                 :src="picture.thumbnailUrl ?? picture.url"
                 loading="lazy"
+                style="height: 180px; object-fit: cover"
               />
             </template>
             <a-card-meta :title="picture.name">
@@ -100,7 +100,7 @@ const fetchData = async () => {
   // 转换搜索参数
   const params = {
     ...searchParams,
-    tags: [] as string[],
+    tags: [] as string[]
   }
   if (selectedCategory.value !== 'all') {
     params.category = selectedCategory.value
@@ -132,6 +132,7 @@ const pagination = computed(() => {
     current: searchParams.current,
     pageSize: searchParams.pageSize,
     total: total.value,
+    showSizeChanger: false,      /*当展示数据大于50条时，不展示切换每页条数的复选框*/
     onChange: (page: number, pageSize: number) => {
       searchParams.current = page
       searchParams.pageSize = pageSize
