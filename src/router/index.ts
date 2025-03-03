@@ -1,14 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../pages/HomePage.vue'
 import HomePage from '@/pages/HomePage.vue'
 import UserLoginPage from '@/pages/user/UserLoginPage.vue'
 import UserRegisterPage from '@/pages/user/UserRegisterPage.vue'
-import UserManagerPage from '@/pages/admin/UserManagerPage.vue'
 import AddPicturePage from '@/pages/AddPicturePage.vue'
 import PictureManagePage from '@/pages/admin/PictureManagePage.vue'
 import PictureDetailPage from '@/pages/PictureDetailPage.vue'
 import AddPictureBatchPage from '@/pages/AddPictureBatchPage.vue'
 import UserUpdatePage from '@/pages/admin/UserUpdatePage.vue'
+import UserManagePage from '@/pages/admin/UserManagePage.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -41,7 +40,7 @@ const router = createRouter({
     {
       path: '/admin/userManage',
       name: '用户管理',
-      component: UserManagerPage
+      component: UserManagePage
     },
     {
       path: '/admin/pictureManage',
