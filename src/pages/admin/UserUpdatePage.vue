@@ -28,13 +28,13 @@
         </a-textarea>
       </a-form-item>
       <a-form-item label="身份" name="userRole">
-        <a-auto-complete
+        <a-select
           v-model:value="userForm.userRole"
           :options="userRoleOptions"
           allow-clear
           placeholder="请选择身份"
         >
-        </a-auto-complete>
+        </a-select>
       </a-form-item>
       <a-form-item>
         <a-button html-type="submit" style="width: 100%" type="primary">

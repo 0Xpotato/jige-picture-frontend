@@ -1,36 +1,26 @@
 <template>
-  <div id="pictureManagePage">
+  <div id="spaceManagePage">
     <a-flex class="header" justify="space-between">
       <h2 style="font-weight: revert">图片管理</h2>
       <a-space>
-        <a-button href="/add_picture" target="_self" type="primary">+ 创建图片</a-button>
-        <a-button ghost href="/add_picture/batch" target="_self" type="primary">+ 批量创建图片</a-button>
+        <a-button href="/add_space" target="_self" type="primary">+ 创建空间</a-button>
       </a-space>
     </a-flex>
 
     <!-- 搜索表单 -->
     <a-form :model="searchParams" class="search" layout="inline" @finish="doSearch">
-      <a-form-item label="关键词" name="searchText">
-        <a-input v-model:value="searchParams.searchText" allow-clear placeholder="从名称和简介搜索">
+      <a-form-item label="空间名称" name="spaceName">
+        <a-input v-model:value="searchParams.spaceName" allow-clear placeholder="从空间名称搜索">
         </a-input>
       </a-form-item>
-      <a-form-item label="类型" name="category">
-        <a-input v-model:value="searchParams.category" allow-clear placeholder="输入图片类型">
-        </a-input>
-      </a-form-item>
-      <a-form-item label="标签" name="tags">
-        <a-select v-model:value="searchParams.tags" allow-clear mode="tags" placeholder="输入图片标签"
-                  style="min-width: 180px">
+      <a-form-item label="空间级别" name="spaceLevel">
+        <a-select v-model:value="searchParams.spaceLevel" :options="SPACE_LEVEL_OPTIONS" allow-clear
+                  placeholder="选择空间级别">
         </a-select>
       </a-form-item>
       <a-form-item label="用户id" name="userId">
         <a-input v-model:value="searchParams.userId" allow-clear placeholder="输入用户id">
         </a-input>
-      </a-form-item>
-      <a-form-item label="审核状态" name="reviewStatus">
-        <a-select v-model:value="searchParams.reviewStatus" :options="PIC_REVIEW_STATUS_OPTIONS" allow-clear
-                  placeholder="请选择审核状态" style="min-width: 180px">
-        </a-select>
       </a-form-item>
       <a-form-item>
         <a-button html-type="submit" type="primary">
@@ -41,29 +31,22 @@
     <!-- 表格 -->
     <a-table :columns="columns" :data-source="dataList" :pagination="pagination" class="table" @change="doTableChange">
       <template #bodyCell="{ column, record }">
-        <template v-if="column.dataIndex === 'url'">
-          <a-image :height="110" :src="record.url" :width="110"/>
+        <!-- 空间级别 -->
+        <template v-if="column.dataIndex === 'spaceLevel'">
+          <a-tag>
+            {{ SPACE_LEVEL_MAP[record.spaceLevel] }}
+          </a-tag>
         </template>
+        <!--使用情况-->
         <template v-if="column.dataIndex === 'tags'">
           <a-tag v-for="tag in JSON.parse(record.tags || '[]')" :key="tag" style="color: orange">{{ tag }}</a-tag>
         </template>
-        <!-- 图片信息 -->
-        <template v-if="column.dataIndex==='picInfo'">
-          <div>格式：{{ record.picFormat }}</div>
-          <div>宽度：{{ record.picWidth }}</div>
-          <div>高度：{{ record.picHeight }}</div>
-          <div>宽高比：{{ record.picScale }}</div>
-          <div>大小：{{ (record.picSize / 1024).toFixed(2) }}KB</div>
+        <!-- 空间信息 -->
+        <template v-if="column.dataIndex==='spaceUseInfo'">
+          <div>大小：{{ formatSize(record.totalSize) }}/{{ formatSize(record.maxSize) }}</div>
+          <div>数量：{{ record.totalCount }}/{{ record.maxCount }}</div>
         </template>
-        <!-- 审核信息 -->
-        <template v-if="column.dataIndex==='reviewMessage'">
-          <div class="reviewInfo" style="color: orange">审核状态：{{ PIC_REVIEW_STATUS_MAP[record.reviewStatus] }}</div>
-          <div class="reviewInfo">审核人：{{ record.reviewerId }}</div>
-          <div class="reviewInfo" style="color: blue">审核信息：{{ record.reviewMessage }}</div>
-          <div v-if="record.reviewTime" class="reviewInfo">
-            审核时间：{{ dayjs(record.reviewTime).format('YYYY-MM-DD HH:mm:ss') }}
-          </div>
-        </template>
+        <!-- 创建时间-->
         <template v-else-if="column.dataIndex === 'createTime'">
           <a-space>
             <div>
@@ -74,6 +57,7 @@
             </div>
           </a-space>
         </template>
+        <!-- 编辑时间-->
         <template v-else-if="column.dataIndex === 'editTime'">
           <a-space>
             <div>
@@ -84,17 +68,10 @@
             </div>
           </a-space>
         </template>
+        <!-- 操作按钮-->
         <template v-else-if="column.key==='action'">
           <a-space wrap>
-            <a-button v-if="record.reviewStatus!==PIC_REVIEW_STATUS_ENUM.PASS" type="link"
-                      @click="handleReview(record,PIC_REVIEW_STATUS_ENUM.PASS)">
-              通过
-            </a-button>
-            <a-button v-if="record.reviewStatus!==PIC_REVIEW_STATUS_ENUM.REJECT" danger
-                      type="link" @click="handleReview(record,PIC_REVIEW_STATUS_ENUM.REJECT)">
-              拒绝
-            </a-button>
-            <a-button :href="`/add_picture?id=${record.id}`" ghost link target="_self" type="link">
+            <a-button :href="`/add_space?id=${record.id}`" ghost link target="_self" type="link">
               编辑
             </a-button>
             <a-button danger type="link" @click="doDelete(record.id)">
@@ -108,14 +85,12 @@
 </template>
 <script lang="ts" setup>
 import { computed, onMounted, reactive, ref } from 'vue'
-import {
-  deletePictureUsingPost,
-  doPictureReviewUsingPost,
-  listPictureByPageUsingPost
-} from '@/api/pictureController.ts'
 import { message } from 'ant-design-vue'
 import dayjs from 'dayjs'
-import { PIC_REVIEW_STATUS_ENUM, PIC_REVIEW_STATUS_MAP, PIC_REVIEW_STATUS_OPTIONS } from '@/constants/picture.ts'
+import { deleteSpaceUsingPost, listSpaceByPageUsingPost } from '@/api/spaceController.ts'
+import { SPACE_LEVEL_MAP, SPACE_LEVEL_OPTIONS } from '../../constants/space.ts'
+import { format } from 'pathe'
+import { formatSize } from '../../utils'
 
 const columns = [
   {
@@ -124,38 +99,21 @@ const columns = [
     width: 80
   },
   {
-    title: '图片',
-    dataIndex: 'url'
+    title: '空间名称',
+    dataIndex: 'spaceName'
   },
   {
-    title: '名称',
-    dataIndex: 'name'
+    title: '空间级别',
+    dataIndex: 'spaceLevel'
   },
   {
-    title: '简介',
-    dataIndex: 'introduction',
-    ellipsis: true
-  },
-  {
-    title: '类型',
-    dataIndex: 'category'
-  },
-  {
-    title: '标签',
-    dataIndex: 'tags'
-  },
-  {
-    title: '图片信息',
-    dataIndex: 'picInfo'
+    title: '使用情况',
+    dataIndex: 'spaceUseInfo'
   },
   {
     title: '用户 id',
     dataIndex: 'userId',
     width: 80
-  },
-  {
-    title: '审核信息',
-    dataIndex: 'reviewMessage'
   },
   {
     title: '创建时间',
@@ -167,17 +125,17 @@ const columns = [
   },
   {
     title: '操作',
-    width: 120,
     key: 'action'
   }
 ]
+
 
 //数据
 const dataList = ref([])
 const total = ref(0)
 
 //搜索条件
-const searchParams = reactive<API.PictureQueryRequest>({
+const searchParams = reactive<API.SpaceQueryRequest>({
   current: 1,
   pageSize: 10,
   sortField: 'createTime',
@@ -191,7 +149,7 @@ const pagination = computed(() => {
     pageSize: searchParams.pageSize ?? 10,
     total: total.value,
     showSizeChanger: true,
-    showQuickJumper:true,
+    showQuickJumper: true,
     /*    showTotal: (total) => {
           return `共${total}条`
         }*/
@@ -203,7 +161,7 @@ const pagination = computed(() => {
 
 //获取数据
 const fetchData = async () => {
-  const res = await listPictureByPageUsingPost({
+  const res = await listSpaceByPageUsingPost({
     ...searchParams
   })
   if (res.data.data) {
@@ -240,7 +198,7 @@ const doDelete = async (id: number) => {
     message.error('id 为空')
     return
   }
-  const res = await deletePictureUsingPost({ id })
+  const res = await deleteSpaceUsingPost({ id })
   if (res.data.code === 0 && res.data.data) {
     //刷新数据
     message.success('删除成功')
@@ -250,27 +208,11 @@ const doDelete = async (id: number) => {
   }
 }
 
-//图片审核
-const handleReview = async (record: API.Picture, reviewStatus: number) => {
-  const reviewMessage = reviewStatus === PIC_REVIEW_STATUS_ENUM.PASS ? '管理员操作通过' : '管理员操作拒绝'
-  const res = await doPictureReviewUsingPost({
-    id: record.id,
-    reviewStatus,
-    reviewMessage
-  })
-  if (res.data.code === 0) {
-    message.success('审核操作成功')
-    // 重新获取列表
-    fetchData()
-  } else {
-    message.error('审核操作失败，' + res.data.message)
-  }
-}
 
 </script>
 
 <style>
-#pictureManagePage {
+#spaceManagePage {
   margin-bottom: 80px;
 }
 
