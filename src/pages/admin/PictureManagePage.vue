@@ -57,7 +57,17 @@
         </template>
         <!-- 审核信息 -->
         <template v-if="column.dataIndex==='reviewMessage'">
-          <div class="reviewInfo" style="color: orange">审核状态：{{ PIC_REVIEW_STATUS_MAP[record.reviewStatus] }}</div>
+          <div class="reviewInfo">
+            <div v-if="record.reviewStatus===0" style="color: blueviolet">
+            审核状态：{{ PIC_REVIEW_STATUS_MAP[record.reviewStatus] }}
+            </div>
+            <div v-if="record.reviewStatus===1" >
+              审核状态：{{ PIC_REVIEW_STATUS_MAP[record.reviewStatus] }}
+            </div>
+            <div v-if="record.reviewStatus===2" style="color: orangered">
+              审核状态：{{ PIC_REVIEW_STATUS_MAP[record.reviewStatus] }}
+            </div>
+          </div>
           <div class="reviewInfo">审核人：{{ record.reviewerId }}</div>
           <div class="reviewInfo" style="color: blue">审核信息：{{ record.reviewMessage }}</div>
           <div v-if="record.reviewTime" class="reviewInfo">

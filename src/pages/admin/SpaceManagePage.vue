@@ -33,7 +33,13 @@
       <template #bodyCell="{ column, record }">
         <!-- 空间级别 -->
         <template v-if="column.dataIndex === 'spaceLevel'">
-          <a-tag>
+          <a-tag v-if="record.spaceLevel===0" color="blue">
+            {{ SPACE_LEVEL_MAP[record.spaceLevel] }}
+          </a-tag>
+          <a-tag v-if="record.spaceLevel===1" color="red">
+            {{ SPACE_LEVEL_MAP[record.spaceLevel] }}
+          </a-tag>
+          <a-tag v-if="record.spaceLevel===2" color="orange">
             {{ SPACE_LEVEL_MAP[record.spaceLevel] }}
           </a-tag>
         </template>
