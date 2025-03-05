@@ -41,16 +41,19 @@
             <a href="https://www.baidu.com" target="_blank">程序员鸡哥</a>
           </a-typography-paragraph>
           <a-typography-paragraph v-for="spaceLevel in spaceLevelList">
-            <div v-if="spaceLevel.value===0">
+            <div v-if="spaceLevel.value===0" style="color: #666666">
+              <CrownTwoTone />
               {{ spaceLevel.text }}：空间大小：{{ formatSize(spaceLevel.maxSize) }}，空间数量：{{ spaceLevel.maxCount }}
             </div>
-            <div v-if="spaceLevel.value===1">
+            <div v-if="spaceLevel.value===1" style="color: blueviolet">
               <a-space>
+                <CrownTwoTone />
                 <CrownTwoTone />
                 {{ spaceLevel.text }}：空间大小：{{ formatSize(spaceLevel.maxSize) }}，空间数量：{{ spaceLevel.maxCount }}
               </a-space>
             </div>
-            <div v-if="spaceLevel.value===2">
+            <div v-if="spaceLevel.value===2" style="color: orange">
+              <CrownTwoTone />
               <CrownTwoTone />
               <CrownTwoTone />
               {{ spaceLevel.text }}：空间大小：{{ formatSize(spaceLevel.maxSize) }}，空间数量：{{ spaceLevel.maxCount }}
