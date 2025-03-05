@@ -34,6 +34,11 @@
                     <LogoutOutlined />
                     退出登录
                   </a-menu-item>
+                  <a-menu-item >
+                    <router-link to="/my_space"/>
+                    <UserOutlined />
+                    我的空间
+                  </a-menu-item>
                 </a-menu>
               </template>
             </a-dropdown>
@@ -49,7 +54,7 @@
 
 <script lang="ts" setup>
 //                      记得要引入图标
-import { HomeOutlined, LogoutOutlined } from '@ant-design/icons-vue'
+import { HomeOutlined, LogoutOutlined,UserOutlined } from '@ant-design/icons-vue'
 import { computed, h, ref } from 'vue'
 import { MenuProps, message } from 'ant-design-vue'
 import { useRouter } from 'vue-router'
