@@ -1,6 +1,6 @@
 <template>
   <div id="mySpace">
-    <p>正在跳转中，请稍后...</p>
+<!--    <p>正在跳转中，请稍后...</p>-->
   </div>
 </template>
 
