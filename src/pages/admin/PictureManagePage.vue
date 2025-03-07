@@ -45,7 +45,7 @@
           <a-image :height="110" :src="record.url" :width="110"/>
         </template>
         <template v-if="column.dataIndex === 'tags'">
-          <a-tag v-for="tag in JSON.parse(record.tags || '[]')" :key="tag" style="color: orange">{{ tag }}</a-tag>
+          <a-tag v-for="tag in JSON.parse(record.tags || '[]')" :key="tag" style="color: dodgerblue">{{ tag }}</a-tag>
         </template>
         <!-- 图片信息 -->
         <template v-if="column.dataIndex==='picInfo'">

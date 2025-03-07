@@ -3,13 +3,13 @@
     <a-row :gutter="[16, 16]">
       <!-- 图片预览 -->
       <a-col :md="16" :sm="24" :xl="18">
-        <a-card title="图片预览">
+        <a-card class="card" title="图片预览">
           <a-image :src="picture.url" style="max-height: 600px; object-fit: contain" />
         </a-card>
       </a-col>
       <!-- 图片信息区域 -->
       <a-col :md="8" :sm="24" :xl="6">
-        <a-card title="图片信息">
+        <a-card class="card-info" title="图片信息">
           <a-descriptions :column="1">
             <a-descriptions-item label="作者">
               <a-space>
@@ -23,11 +23,13 @@
             <a-descriptions-item label="简介">
               {{ picture.introduction ?? '-' }}
             </a-descriptions-item>
-            <a-descriptions-item label="分类">
-              {{ picture.category ?? '默认' }}
+            <a-descriptions-item label="类型">
+              <a-tag style="color: green">
+                {{ picture.category ?? '默认' }}
+              </a-tag>
             </a-descriptions-item>
             <a-descriptions-item label="标签">
-              <a-tag v-for="tag in picture.tags" :key="tag">
+              <a-tag v-for="tag in picture.tags" :key="tag" style="color: dodgerblue">
                 {{ tag }}
               </a-tag>
             </a-descriptions-item>
@@ -102,7 +104,7 @@ const canEdit = computed(() => {
 const fetchPictureDetail = async () => {
   try {
     const res = await getPictureVoByIdUsingGet({
-      id: props.id,
+      id: props.id
     })
     if (res.data.code === 0 && res.data.data) {
       picture.value = res.data.data
@@ -134,6 +136,9 @@ const doDelete = async () => {
   const res = await deletePictureUsingPost({ id })
   if (res.data.code === 0) {
     message.success('删除成功')
+    router.push({
+      path: '/'
+    })
   } else {
     message.error('删除失败')
   }
@@ -148,6 +153,16 @@ const doDownload = () => {
 <style scoped>
 #pictureDetailPage {
   margin-bottom: 16px;
+}
+
+.card {
+  text-align: center;
+
+}
+
+.card-info {
+  text-align: center;
+  border-color: blueviolet;
 }
 </style>
 
