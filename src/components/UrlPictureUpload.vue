@@ -4,6 +4,9 @@
       <a-input v-model:value="fileUrl" placeholder="请输入图片 URL" style="width: calc(100% - 120px)" />
       <a-button :loading="loading" style="width: 120px" type="primary" @click="handleUpload">提交</a-button>
     </a-input-group>
+    <div v-if="!picture?.url" class="tip">
+      <a-alert message="例如：https://www.XX.com/XX.jpg" type="info" />
+    </div>
     <div class="img-wrapper">
       <img v-if="picture?.url" :src="picture?.url" alt="avatar" />
     </div>
@@ -32,6 +35,7 @@ const handleUpload = async () => {
   loading.value = true
   try {
     const params: API.PictureUploadRequest = { fileUrl: fileUrl.value }
+    params.spaceId = props.spaceId;
     if (props.picture) {
       params.id = props.picture.id
     }
