@@ -38,7 +38,6 @@
 
 // 定义数据
 import { useRouter } from 'vue-router'
-import { ref } from 'vue'
 
 interface Props {
   dataList?: API.PictureVO[],

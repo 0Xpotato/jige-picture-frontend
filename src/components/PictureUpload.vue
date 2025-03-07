@@ -1,18 +1,18 @@
 <template>
   <div id="picture-upload">
-  <a-upload
-    list-type="picture-card"
-    :show-upload-list="false"
-    :custom-request="handleUpload"
-    :before-upload="beforeUpload"
-  >
-    <img v-if="picture?.url" :src="picture?.url" alt="avatar" style="max-width: 720px;max-height: 720px"/>
-    <div v-else>
-      <loading-outlined v-if="loading"></loading-outlined>
-      <plus-outlined v-else></plus-outlined>
-      <div class="ant-upload-text">点击或拖拽上传图片</div>
-    </div>
-  </a-upload>
+    <a-upload
+      :before-upload="beforeUpload"
+      :custom-request="handleUpload"
+      :show-upload-list="false"
+      list-type="picture-card"
+    >
+      <img v-if="picture?.url" :src="picture?.url" alt="avatar" style="max-width: 720px;max-height: 720px" />
+      <div v-else>
+        <loading-outlined v-if="loading"></loading-outlined>
+        <plus-outlined v-else></plus-outlined>
+        <div class="ant-upload-text">点击或拖拽上传图片</div>
+      </div>
+    </a-upload>
   </div>
 </template>
 <script lang="ts" setup>
@@ -22,10 +22,11 @@ import type { UploadProps } from 'ant-design-vue'
 import { message } from 'ant-design-vue'
 import { uploadPictureUsingPost } from '@/api/pictureController.ts'
 
-const loading = ref<boolean>(false);
+const loading = ref<boolean>(false)
 
 interface Props {
   picture?: API.PictureVO
+  spaceId?: number
   onSuccess?: (newPicture: API.PictureVO) => void
 }
 
@@ -51,7 +52,8 @@ const beforeUpload = (file: UploadProps['fileList'][number]) => {
 const handleUpload = async ({ file }: any) => {
   loading.value = true
   try {
-    const params = props.picture ? { id: props.picture.id } : {};
+    const params = props.picture ? { id: props.picture.id } : {}
+    params.spaceId = props.spaceId
     const res = await uploadPictureUsingPost(params, {}, file)
     if (res.data.code === 0 && res.data.data) {
       message.success('图片上传成功')

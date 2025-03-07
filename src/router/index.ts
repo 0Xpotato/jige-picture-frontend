@@ -11,6 +11,7 @@ import UserManagePage from '@/pages/admin/UserManagePage.vue'
 import SpaceManagePage from '@/pages/admin/SpaceManagePage.vue'
 import AddSpacePage from '@/pages/AddSpacePage.vue'
 import MySpacePage from '@/pages/MySpacePage.vue'
+import SpaceDetailPage from '@/pages/SpaceDetailPage.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -69,25 +70,25 @@ const router = createRouter({
       path: '/user/update',
       name: '用户更新',
       component: UserUpdatePage
-    },{
-      path:'/admin/spaceManage',
-      name:'空间管理',
-      component:SpaceManagePage
-    },{
-      path:'/add_space',
-      name:'创建空间',
-      component:AddSpacePage
+    }, {
+      path: '/admin/spaceManage',
+      name: '空间管理',
+      component: SpaceManagePage
+    }, {
+      path: '/add_space',
+      name: '创建空间',
+      component: AddSpacePage
     },
     {
-      path:'/my_space',
-      name:'我的空间',
-      component:MySpacePage
+      path: '/my_space',
+      name: '我的空间',
+      component: MySpacePage
     },
     {
-      path:'/space/:id',
-      name:'空间详情',
-      component:SpaceDetailPage,
-      props:true
+      path: '/space/:id',
+      name: '空间详情',
+      component: SpaceDetailPage,
+      props: true
     }
 
   ]

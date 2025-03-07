@@ -6,10 +6,10 @@
     <!--选择输入框-->
     <a-tabs v-model:activeKey="uploadType">
       <a-tab-pane key="file" tab="文件上传">
-        <PictureUpload :onSuccess="onSuccess" :picture="picture" />
+        <PictureUpload :onSuccess="onSuccess" :picture="picture" :spaceId="spaceId"/>
       </a-tab-pane>
       <a-tab-pane key="url" force-render tab="URL 上传">
-        <UrlPictureUpload :on-success="onSuccess" :picture="picture" />
+        <UrlPictureUpload :on-success="onSuccess" :picture="picture" :spaceId="spaceId"/>
       </a-tab-pane>
 
     </a-tabs>
@@ -68,7 +68,7 @@
 </template>
 <script lang="ts" setup>
 import PictureUpload from '@/components/PictureUpload.vue'
-import { onMounted, reactive, ref } from 'vue'
+import { computed, onMounted, reactive, ref } from 'vue'
 import {
   editPictureUsingPost,
   getPictureVoByIdUsingGet,
@@ -100,6 +100,7 @@ const handleSubmit = async (values: any) => {
   }
   const res = await editPictureUsingPost({
     id: pictureId,
+    spaceId:spaceId.value,
     ...values
   })
   if (res.data.code === 0 && res.data.data) {
@@ -165,7 +166,11 @@ onMounted(() => {
   getOldPicture()
 })
 
-const uploadType=ref<'file' | 'url'>('file')
+const uploadType = ref<'file' | 'url'>('file')
+
+const spaceId = computed(() => {
+  return route.query?.spaceId
+})
 </script>
 <style>
 #addPicturePage {

@@ -73,6 +73,13 @@ const searchParams = reactive<API.PictureQueryRequest>({
   sortOrder: 'descend'
 })
 
+// 分页参数
+const onPageChange = ((page: number, pageSize: number) => {
+  searchParams.current = page
+  searchParams.pageSize = pageSize
+  fetchData()
+})
+
 // 获取数据
 const fetchData = async () => {
   loading.value = true
@@ -107,12 +114,7 @@ onMounted(() => {
   fetchData()
 })
 
-// 分页参数
-const onPageChange = ((page: number, pageSize: number) => {
-  searchParams.current = page
-  searchParams.pageSize = pageSize
-  fetchData()
-})
+
 
 
 // 搜索
