@@ -3,13 +3,17 @@
     <h2 style="margin-bottom: 16px">
       {{ route.query?.id ? '修改图片' : '创建图片' }}
     </h2>
+
+    <a-typography-paragraph v-if="spaceId" type="secondary">
+      保存至空间：<a :href="`/space/${spaceId}`" target="_blank">{{ spaceId }}</a>
+    </a-typography-paragraph>
     <!--选择输入框-->
     <a-tabs v-model:activeKey="uploadType">
       <a-tab-pane key="file" tab="文件上传">
-        <PictureUpload :onSuccess="onSuccess" :picture="picture" :spaceId="spaceId"/>
+        <PictureUpload :onSuccess="onSuccess" :picture="picture" :spaceId="spaceId" />
       </a-tab-pane>
       <a-tab-pane key="url" force-render tab="URL 上传">
-        <UrlPictureUpload :on-success="onSuccess" :picture="picture" :spaceId="spaceId"/>
+        <UrlPictureUpload :on-success="onSuccess" :picture="picture" :spaceId="spaceId" />
       </a-tab-pane>
 
     </a-tabs>
@@ -100,7 +104,7 @@ const handleSubmit = async (values: any) => {
   }
   const res = await editPictureUsingPost({
     id: pictureId,
-    spaceId:spaceId.value,
+    spaceId: spaceId.value,
     ...values
   })
   if (res.data.code === 0 && res.data.data) {
