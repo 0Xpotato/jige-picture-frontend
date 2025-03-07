@@ -11,7 +11,7 @@
       </a-space>
     </a-flex>
     <!-- 图片列表 -->
-    <PictureList :data-list="dataList" :loading="loading"/>
+    <PictureList :dataList="dataList" :loading="loading" :onReload="fetchData" :showOp="true" />
     <a-pagination
       v-model:current="searchParams.current"
       v-model:pageSize="searchParams.pageSize"
@@ -25,9 +25,8 @@
 
 <script lang="ts" setup>
 import { onMounted, reactive, ref } from 'vue'
-import { listPictureVoByPageUsingPost, listPictureVoByPageWithCacheUsingPost } from '@/api/pictureController.ts'
+import { listPictureVoByPageUsingPost } from '@/api/pictureController.ts'
 import { message } from 'ant-design-vue'
-import { useRouter } from 'vue-router'
 import { getSpaceVoByIdUsingPost } from '@/api/spaceController.ts'
 import { formatSize } from '@/utils'
 import PictureList from '@/components/PictureList.vue'

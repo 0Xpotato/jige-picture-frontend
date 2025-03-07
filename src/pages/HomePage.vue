@@ -44,12 +44,8 @@
 
 
 <script lang="ts" setup>
-import { computed, onMounted, reactive, ref } from 'vue'
-import {
-  listPictureTagCategoryUsingGet,
-  listPictureVoByPageUsingPost,
-  listPictureVoByPageWithCacheUsingPost
-} from '@/api/pictureController.ts'
+import { onMounted, reactive, ref } from 'vue'
+import { listPictureTagCategoryUsingGet, listPictureVoByPageWithCacheUsingPost } from '@/api/pictureController.ts'
 import { message } from 'ant-design-vue'
 import { useRouter } from 'vue-router'
 import PictureList from '@/components/PictureList.vue' // 定义数据
@@ -86,6 +82,7 @@ const fetchData = async () => {
   // 转换搜索参数
   const params = {
     ...searchParams,
+    nullSpaceId:true,
     tags: [] as string[]
   }
   if (selectedCategory.value !== 'all') {
