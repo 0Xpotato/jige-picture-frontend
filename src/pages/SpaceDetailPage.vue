@@ -12,6 +12,11 @@
     </a-flex>
     <!-- 搜索表单 -->
     <PictureSearchForm :onSearch="onSearch" />
+    <!-- 按颜色搜索 -->
+    <a-form-item label="按颜色搜索" style="margin-top: 16px">
+      <!-- format 要设置为 hex，得到十六进制的颜色值。-->
+      <color-picker format="hex" @pureColorChange="onColorChange" />
+    </a-form-item>
     <!-- 图片列表 -->
     <PictureList :dataList="dataList" :loading="loading" :onReload="fetchData" :showOp="true" />
     <a-pagination
@@ -26,13 +31,15 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, reactive, ref } from 'vue'
-import { listPictureVoByPageUsingPost } from '@/api/pictureController.ts'
+import { onMounted, ref } from 'vue'
+import { listPictureVoByPageUsingPost, searchPictureByColorUsingPost } from '@/api/pictureController.ts'
 import { message } from 'ant-design-vue'
 import { getSpaceVoByIdUsingPost } from '@/api/spaceController.ts'
 import { formatSize } from '@/utils'
 import PictureList from '@/components/PictureList.vue'
 import PictureSearchForm from '@/components/PictureSearchForm.vue'
+import { ColorPicker } from 'vue3-colorpicker'
+import 'vue3-colorpicker/style.css'
 
 
 const props = defineProps<{
@@ -75,7 +82,7 @@ const searchParams = ref<API.PictureQueryRequest>({
   current: 1,
   pageSize: 12,
   sortField: 'createTime',
-  sortOrder: 'descend',
+  sortOrder: 'descend'
 })
 
 // 分页参数
@@ -90,7 +97,7 @@ const onSearch = (newSearchParams: API.PictureQueryRequest) => {
   searchParams.value = {
     ...searchParams.value,
     ...newSearchParams,
-    current: 1,
+    current: 1
   }
   fetchData()
 }
@@ -101,7 +108,7 @@ const fetchData = async () => {
   // 转换搜索参数
   const params = {
     spaceId: props.id,
-    ...searchParams.value,
+    ...searchParams.value
   }
   const res = await listPictureVoByPageUsingPost(params)
   if (res.data.data) {
@@ -114,11 +121,23 @@ const fetchData = async () => {
 }
 
 
-
 onMounted(() => {
   fetchData()
 })
 
+const onColorChange = async (color: string) => {
+  const res = await searchPictureByColorUsingPost({
+    picColor: color,
+    spaceId: props.id,
+  })
+  if (res.data.code === 0 && res.data.data) {
+    const data = res.data.data ?? [];
+    dataList.value = data;
+    total.value = data.length;
+  } else {
+    message.error('获取数据失败，' + res.data.message)
+  }
+}
 
 
 </script>
