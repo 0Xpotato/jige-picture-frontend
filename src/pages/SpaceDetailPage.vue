@@ -4,7 +4,7 @@
     <a-flex justify="space-between">
       <h2>{{ space.spaceName }}（私有空间）</h2>
       <a-space size="middle">
-        <a-button :href="`/add_picture?spaceId=${id}`" target="_blank" type="primary">
+        <a-button :href="`/add_picture?spaceId=${id}`" target="_self" type="primary">
           + 创建图片
         </a-button>
         <a-button :icon="h(EditOutlined)" @click="doBatchEdit"> 批量编辑 </a-button>

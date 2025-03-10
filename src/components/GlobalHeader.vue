@@ -30,14 +30,14 @@
               </ASpace>
               <template #overlay>
                 <a-menu>
-                  <a-menu-item @click="doLogout">
-                    <LogoutOutlined />
-                    退出登录
-                  </a-menu-item>
                   <a-menu-item >
                     <router-link to="/my_space"/>
                     <UserOutlined />
                     我的空间
+                  </a-menu-item>
+                  <a-menu-item @click="doLogout">
+                    <LogoutOutlined />
+                    退出登录
                   </a-menu-item>
                 </a-menu>
               </template>
