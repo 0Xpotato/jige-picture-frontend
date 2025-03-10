@@ -83,7 +83,6 @@ const doSearch = (picture, e) => {
   window.open(`/search_picture?pictureId=${picture.id}`)
 }
 
-
 // 编辑
 const doEdit = (picture, e) => {
   // 阻止冒泡

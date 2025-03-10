@@ -31,7 +31,7 @@
       </a-space>
     </div>
     <!-- 图片列表 -->
-    <PictureList :data-list="dataList" :loading="loading" />
+    <PictureList :data-list="dataList" :loading="loading" :showOp="true"/>
     <a-pagination
       v-model:current="searchParams.current"
       v-model:pageSize="searchParams.pageSize"
