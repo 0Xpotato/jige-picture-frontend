@@ -9,6 +9,7 @@ lerna-debug.log*
 
 ###custom###
 vite.config.ts
+request.ts
 
 node_modules
 .DS_Store

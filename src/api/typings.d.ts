@@ -230,6 +230,7 @@ declare namespace API {
     picScale?: number
     picSize?: number
     picWidth?: number
+    pngUrl?: string
     reviewMessage?: string
     reviewStatus?: number
     reviewTime?: string
@@ -329,6 +330,7 @@ declare namespace API {
     picScale?: number
     picSize?: number
     picWidth?: number
+    pngUrl?: string
     spaceId?: number
     tags?: string[]
     thumbnailUrl?: string
