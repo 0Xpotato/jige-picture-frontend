@@ -6,7 +6,7 @@
       :show-upload-list="false"
       list-type="picture-card"
     >
-      <img v-if="picture?.url" :src="picture?.url" alt="avatar" style="max-width: 720px;max-height: 720px" />
+      <img v-if="picture?.url" :src="picture?.thumbnailUrl" alt="avatar" style="max-width: 720px;max-height: 720px" />
       <div v-else>
         <loading-outlined v-if="loading"></loading-outlined>
         <plus-outlined v-else></plus-outlined>
