@@ -137,10 +137,10 @@ export async function createPictureOutPaintingTaskUsingPost(
   })
 }
 
-/** getOutPaintingTask GET /api/out_painting/get_task */
-export async function getOutPaintingTaskUsingGet(
+/** getPictureOutPaintingTask GET /api/out_painting/get_task */
+export async function getPictureOutPaintingTaskUsingGet(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
-  params: API.getOutPaintingTaskUsingGETParams,
+  params: API.getPictureOutPaintingTaskUsingGETParams,
   options?: { [key: string]: any }
 ) {
   return request<API.BaseResponseGetOutPaintingTaskResponse_>('/api/out_painting/get_task', {

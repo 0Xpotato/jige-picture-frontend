@@ -7,7 +7,7 @@
     <a-typography-paragraph v-if="spaceId" type="secondary">
       保存至空间：<a :href="`/space/${spaceId}`" target="_blank">{{ spaceId }}</a>
     </a-typography-paragraph>
-    <!--选择输入框-->
+    <!-- 选择上传方式 -->
     <a-tabs v-model:activeKey="uploadType">
       <a-tab-pane key="file" tab="文件上传">
         <PictureUpload :onSuccess="onSuccess" :picture="picture" :spaceId="spaceId" />
@@ -15,21 +15,30 @@
       <a-tab-pane key="url" force-render tab="URL 上传">
         <UrlPictureUpload :on-success="onSuccess" :picture="picture" :spaceId="spaceId" />
       </a-tab-pane>
-
     </a-tabs>
-
+    <!-- 图片编辑 AI 编辑 + 编辑图片-->
     <div v-if="picture" class="edit-bar">
-      <a-button :icon="h(EditOutlined)" @click="doEditPicture">编辑图片</a-button>
+      <a-space size="middle">
+        <a-button :icon="h(EditOutlined)" @click="doEditPicture">编辑图片</a-button>
+        <a-button v-if="loginUserStore.loginUser.userRole==='admin'" :icon="h(FullscreenOutlined)" type="primary" @click="doImagePainting">
+          AI 扩图
+        </a-button>
+      </a-space>
       <ImageCropper
         ref="imageCropperRef"
         :imageUrl="picture?.url"
-        :onSuccess="onCropSuccess"
         :picture="picture"
         :spaceId="spaceId"
+        :onSuccess="onCropSuccess"
+      />
+      <ImageOutPainting
+        ref="imageOutPaintingRef"
+        :picture="picture"
+        :spaceId="spaceId"
+        :onSuccess="onImageOutPaintingSuccess"
       />
     </div>
-
-    <!--    输入框-->
+    <!--    图片信息表单输入框-->
     <a-form
       v-if="picture"
       :model="pictureForm"
@@ -93,8 +102,10 @@ import {
 import { message } from 'ant-design-vue'
 import { useRoute, useRouter } from 'vue-router'
 import UrlPictureUpload from '@/components/UrlPictureUpload.vue'
-import { EditOutlined } from '@ant-design/icons-vue'
+import { EditOutlined,FullscreenOutlined } from '@ant-design/icons-vue'
 import ImageCropper from '@/components/ImageCropper.vue'
+import ImageOutPainting from '@/components/ImageOutPainting.vue'
+import { useLoginUserStore } from '@/stores/useLoginUserStore.ts'
 
 
 const picture = ref<API.PictureVO>()
@@ -205,6 +216,22 @@ const onCropSuccess = (newPicture: API.PictureVO) => {
   picture.value = newPicture
 }
 
+// AI 扩图弹窗引用
+const imageOutPaintingRef = ref()
+
+// AI 扩图
+const doImagePainting = () => {
+  if (imageOutPaintingRef.value) {
+    imageOutPaintingRef.value.openModal()
+  }
+}
+
+// 编辑成功事件
+const onImageOutPaintingSuccess = (newPicture: API.PictureVO) => {
+  picture.value = newPicture
+}
+
+const loginUserStore = useLoginUserStore()
 </script>
 <style>
 #addPicturePage {

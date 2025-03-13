@@ -158,14 +158,14 @@ declare namespace API {
     requestId?: string
   }
 
-  type getOutPaintingTaskUsingGETParams = {
-    /** taskId */
-    taskId?: string
-  }
-
   type getPictureByIdUsingGETParams = {
     /** id */
     id?: number
+  }
+
+  type getPictureOutPaintingTaskUsingGETParams = {
+    /** taskId */
+    taskId?: string
   }
 
   type getPictureVoByIdUsingGETParams = {

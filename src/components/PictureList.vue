@@ -31,10 +31,10 @@
             </a-card-meta>
             <ShareModal ref="shareModalRef" :link="shareLink" />
             <template v-if="showOp" #actions>
-              <search-outlined @click="(e) => doSearch(picture, e)" />
+              <search-outlined v-if="loginUserStore.loginUser.id" @click="(e) => doSearch(picture, e)" />
               <share-alt-outlined @click="(e) => doShare(picture, e)" />
-              <edit-outlined @click="(e) => doEdit(picture, e)" />
-              <delete-outlined @click="(e) => doDelete(picture, e)" />
+              <edit-outlined v-if="loginUserStore.loginUser.userRole==='admin'" @click="(e) => doEdit(picture, e)" />
+              <delete-outlined v-if="loginUserStore.loginUser.userRole==='admin'" @click="(e) => doDelete(picture, e)" />
             </template>
           </a-card>
         </a-list-item>
@@ -55,6 +55,7 @@ import { deletePictureUsingPost } from '@/api/pictureController.ts'
 import { message } from 'ant-design-vue'
 import { ref } from 'vue'
 import ShareModal from "@/components/ShareModal.vue";
+import { useLoginUserStore } from '@/stores/useLoginUserStore.ts'
 
 interface Props {
   dataList?: API.PictureVO[]
@@ -110,7 +111,7 @@ const doDelete = async (picture, e) => {
     message.success('删除成功')
     props.onReload?.()
   } else {
-    message.error('删除失败')
+    message.error('删除失败，'+res.data.message)
   }
 }
 
@@ -127,6 +128,9 @@ const doShare = (picture: API.PictureVO, e: Event) => {
     shareModalRef.value.openModal()
   }
 }
+
+const loginUserStore = useLoginUserStore()
+
 </script>
 
 <style scoped></style>

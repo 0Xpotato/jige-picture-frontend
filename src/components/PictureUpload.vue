@@ -35,7 +35,7 @@ const props = defineProps<Props>()
 const beforeUpload = (file: UploadProps['fileList'][number]) => {
   const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png'
   if (!isJpgOrPng) {
-    message.error('不支持上传该格式的图片，推荐 jpg 或 png')
+    message.error('不支持上传该格式的图片，推荐 jpg 、 png 、 jpeg')
   }
   const isLt2M = file.size / 1024 / 1024 <= 2
   if (!isLt2M) {
