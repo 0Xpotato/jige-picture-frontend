@@ -19,7 +19,8 @@
     >
       <template #renderItem="{ item }">
         <a-list-item style="padding: 0">
-          <a :href="item.fromUrl" target="_blank">
+<!--          <a :href="item.fromUrl" target="_blank">-->
+          <a :href="item.thumbUrl" target="_blank">
             <a-card>
               <template #cover>
                 <img :src="item.thumbUrl" style="height: 180px; object-fit: cover" />
