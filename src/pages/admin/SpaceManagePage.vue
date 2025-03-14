@@ -27,6 +27,17 @@
           搜索
         </a-button>
       </a-form-item>
+
+      <a-space>
+        <a-button href="/add_space" target="_self" type="primary">+ 创建空间</a-button>
+        <a-button ghost href="/space_analyze?queryPublic=1" target="_self" type="primary">
+          分析公共图库
+        </a-button>
+        <a-button ghost href="/space_analyze?queryAll=1" target="_self" type="primary">
+          分析全空间
+        </a-button>
+      </a-space>
+
     </a-form>
     <!-- 表格 -->
     <a-table :columns="columns" :data-source="dataList" :pagination="pagination" class="table" @change="doTableChange">
@@ -77,12 +88,13 @@
         <!-- 操作按钮-->
         <template v-else-if="column.key==='action'">
           <a-space wrap>
-            <a-button :href="`/add_space?id=${record.id}`" ghost link target="_self" type="link">
+            <a-button :href="`/space_analyze?spaceId=${record.id}`" target="_self" type="link">
+              分析
+            </a-button>
+            <a-button :href="`/add_space?id=${record.id}`" target="_self" type="link">
               编辑
             </a-button>
-            <a-button danger type="link" @click="doDelete(record.id)">
-              删除
-            </a-button>
+            <a-button danger @click="doDelete(record.id)">删除</a-button>
           </a-space>
         </template>
       </template>
