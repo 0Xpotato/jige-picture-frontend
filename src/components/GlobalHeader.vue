@@ -30,8 +30,8 @@
               </ASpace>
               <template #overlay>
                 <a-menu>
-                  <a-menu-item >
-                    <router-link to="/my_space"/>
+                  <a-menu-item>
+                    <router-link to="/my_space" />
                     <UserOutlined />
                     我的空间
                   </a-menu-item>
@@ -54,7 +54,15 @@
 
 <script lang="ts" setup>
 //                      记得要引入图标
-import { HomeOutlined, LogoutOutlined,UserOutlined } from '@ant-design/icons-vue'
+import {
+  HomeOutlined,
+  LogoutOutlined,
+  UserOutlined,
+  ContactsOutlined,
+  PlusOutlined,
+  PicCenterOutlined,
+  BlockOutlined
+} from '@ant-design/icons-vue'
 import { computed, h, ref } from 'vue'
 import { MenuProps, message } from 'ant-design-vue'
 import { useRouter } from 'vue-router'
@@ -73,20 +81,23 @@ const originItems = [
   },
   {
     key: '/admin/userManage',
-    // icon: () => h(HomeOutlined),
+    icon: () => h(ContactsOutlined),
     label: '用户管理',
     title: '用户管理'
   }, {
     key: '/add_picture',
+    icon: () => h(PlusOutlined),
     label: '创建图片',
     title: '创建图片'
   },
   {
     key: '/admin/pictureManage',
+    icon: () => h(PicCenterOutlined),
     label: '图片管理',
     title: '图片管理'
   }, {
     key: '/admin/spaceManage',
+    icon: () => h(BlockOutlined),
     label: '空间管理',
     title: '空间管理'
   }
