@@ -31,7 +31,7 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 // 时间维度选项
-const timeDimension = ref<'day' | 'week' | 'month' | 'year'>('week')
+const timeDimension = ref<'day' | 'week' | 'month' | 'year'>('day')
 // 分段选择器组件的选项
 const timeDimensionOptions = [
   {
