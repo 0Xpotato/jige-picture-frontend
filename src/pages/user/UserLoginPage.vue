@@ -23,9 +23,14 @@
         <a-input-password v-model:value="formState.userPassword" placeholder="请输入密码" />
       </a-form-item>
 
-      <div class="tips">
+<!--      <div class="tips">
         没有账号？
         <RouterLink to="/user/register">去注册</RouterLink>
+      </div>-->
+
+      <div class="tips">
+        没有账号？
+        <a type="link">请联系管理员</a>
       </div>
 
       <a-form-item>

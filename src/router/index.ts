@@ -38,11 +38,11 @@ const router = createRouter({
       name: '用户登录',
       component: UserLoginPage
     },
-    {
+/*    {
       path: '/user/register',
       name: '用户注册',
       component: UserRegisterPage
-    },
+    },*/
     {
       path: '/admin/userManage',
       name: '用户管理',
