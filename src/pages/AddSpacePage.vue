@@ -38,8 +38,8 @@
         <a-card hoverable title="空间级别介绍">
           <a-typography-paragraph>
             * 目前仅支持开通普通版，如需升级空间，请联系
-<!--            <a href="https://www.baidu.com" target="_blank">程序员鸡哥</a>-->
-            <a target="_blank" type="link">程序员鸡哥</a>
+            <a href="https://gitee.com/Lucky__Style" target="_blank">程序员鸡哥</a>
+<!--            <a target="_blank" type="link">程序员鸡哥</a>-->
           </a-typography-paragraph>
           <a-typography-paragraph v-for="spaceLevel in spaceLevelList">
             <div v-if="spaceLevel.value===0" style="color: #666666">

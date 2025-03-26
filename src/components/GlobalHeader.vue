@@ -100,7 +100,12 @@ const originItems = [
     icon: () => h(BlockOutlined),
     label: '空间管理',
     title: '空间管理'
-  }
+  },
+  {
+    key: '',
+    label: h('a', { href: 'https://gitee.com/Lucky__Style', target: '_blank' }, '联系作者'),
+    title: '联系作者'
+  },
   /*,
   {
     key: 'others',
