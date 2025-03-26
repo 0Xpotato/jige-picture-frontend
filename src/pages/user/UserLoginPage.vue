@@ -30,7 +30,7 @@
 
       <div class="tips">
         没有账号？
-        <a type="link">请联系管理员</a>
+        <a href="https://gitee.com/Lucky__Style" type="link">请联系管理员</a>
       </div>
 
       <a-form-item>
