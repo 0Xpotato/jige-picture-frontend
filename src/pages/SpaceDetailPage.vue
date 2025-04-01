@@ -174,6 +174,10 @@ const onColorChange = async (color: string) => {
   loading.value = false
 }
 
+onMounted(()=>{
+  onColorChange('#000000')
+})
+
 // ---- 批量编辑图片 -----
 const batchEditPictureModalRef = ref()
 
