@@ -98,6 +98,7 @@ const doEdit = (picture, e) => {
   })
 }
 
+
 // 删除数据
 const doDelete = async (picture, e) => {
   // 阻止冒泡
@@ -109,6 +110,9 @@ const doDelete = async (picture, e) => {
   const res = await deletePictureUsingPost({ id })
   if (res.data.code === 0) {
     message.success('删除成功')
+    await router.push({
+      path: `/space/${picture.spaceId}`
+    })
     props.onReload?.()
   } else {
     message.error('删除失败，' + res.data.message)
