@@ -40,7 +40,7 @@
       <color-picker format="hex" @pureColorChange="onColorChange" />
     </a-form-item>
     <!-- 图片列表 -->
-    <PictureList :dataList="dataList" :loading="loading" :onReload="fetchData" :showOp="true" />
+    <PictureListInSpace :dataList="dataList" :loading="loading" :onReload="fetchData" :showOp="true" />
     <!-- 分页 -->
     <a-pagination
       style="text-align: right"
@@ -71,6 +71,7 @@ import 'vue3-colorpicker/style.css'
 import BatchEditPictureModal from '@/components/BatchEditPictureModal.vue'
 import { EditOutlined,BarChartOutlined } from '@ant-design/icons-vue'
 import { getSpaceVoByIdUsingPost } from '@/api/spaceController.ts'
+import PictureListInSpace from '@/components/PictureListInSpace.vue'
 
 interface Props {
   id: string | number
