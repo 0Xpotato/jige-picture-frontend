@@ -7,7 +7,8 @@
           <div class="title-bar">
             <!--图标和标题，名字随意取-->
             <img alt="logo" class="logo" src="../assets/logo.ico" />
-            <div class="title">鸡哥云图库</div>
+<!--            <div class="title">鸡哥云图库</div>-->
+            <div class="title">吉格云图库</div>
           </div>
         </router-link>
       </a-col>
@@ -101,10 +102,16 @@ const originItems = [
     label: '空间管理',
     title: '空间管理'
   },
-  {
+/*  {
     key: '',
     label: h('a', { href: 'https://gitee.com/Lucky__Style', target: '_blank' }, '联系作者'),
     title: '联系作者'
+  },*/
+  {
+    key: '/about',
+    icon: () => h(BlockOutlined),
+    label: '关于作者',
+    title: '关于作者'
   },
   /*,
   {

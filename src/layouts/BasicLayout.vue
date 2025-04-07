@@ -5,15 +5,16 @@
         <global-header />
       </a-layout-header>
       <a-layout>
-        <GlobalSider class="sider"/>
+        <GlobalSider class="sider" />
         <a-layout-content class="content">
           <router-view />
         </a-layout-content>
       </a-layout>
       <a-layout-footer class="footer">
-                <a href="https://gitee.com/Lucky__Style">鸡哥云图库 by 程序员鸡哥</a>
-<!--                <a href="https://gitee.com/Lucky__Style">鸡哥智能协同云图库 by 程序员鸡哥</a>-->
-<!--        <a type="link">鸡哥智能协同云图库 by 程序员鸡哥</a>-->
+        <a href="https://gitee.com/Lucky__Style">吉格云图库 by 程序员鸡哥</a>
+<!--        <a href="https://gitee.com/Lucky__Style">鸡哥云图库 by 程序员鸡哥</a>-->
+        <!--                <a href="https://gitee.com/Lucky__Style">鸡哥智能协同云图库 by 程序员鸡哥</a>-->
+        <!--        <a type="link">鸡哥智能协同云图库 by 程序员鸡哥</a>-->
       </a-layout-footer>
     </a-layout>
   </div>
@@ -47,7 +48,7 @@ import GlobalSider from '@/components/GlobalSider.vue'
   text-align: center;
 }
 
-#basicLayout .sider{
+#basicLayout .sider {
   background: #fff;
   padding-top: 20px;
   border-right: 0.5px solid #eee;
