@@ -2,10 +2,11 @@
   <div id="url-picture-upload">
     <a-input-group compact style="margin-bottom: 16px">
       <a-input v-model:value="fileUrl" placeholder="请输入图片 URL" style="width: calc(100% - 120px)" />
-      <a-button :loading="loading" style="width: 120px" type="primary" @click="handleUpload">提交</a-button>
+      <a-button :loading="loading" style="width: 80px;font-size: 16px;margin-top: 2%" type="primary" @click="handleUpload">提交</a-button>
     </a-input-group>
     <div v-if="!picture?.url" class="tip">
-      <a-alert message="例如：https://www.XX.com/XX.jpg" type="info" />
+      <a-alert message="例如：https://www.iqiyi.com/logo.png" type="info" />
+      <a-alert message="温馨提示：（仅供参考，请勿对其网站造成不良影响，若造成影响后果自负）！" style="margin-top: 1%" type="warning" />
     </div>
     <div class="img-wrapper">
       <img v-if="picture?.url" :src="picture?.url" alt="avatar" />

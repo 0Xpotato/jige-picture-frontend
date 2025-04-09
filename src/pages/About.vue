@@ -22,7 +22,7 @@
         <h2
           class="animate-text"
           data-aos="fade-up"
-          data-aos-delay="100"
+          data-aos-delay="300"
           style="margin-bottom: 2%"
         >
           你好, 我是Lucky Style, 00后, 26届毕业生, 热爱计算机互联网事业
@@ -30,17 +30,18 @@
         <h2
           class="animate-text"
           data-aos="fade-up"
-          data-aos-delay="300"
+          data-aos-delay="500"
           style="margin-bottom: 2%"
         >
-          一望无际的迷雾中, 有人在寻找光明！很高兴遇到你, 我们一直在耕耘这么一片简单的土壤, 虽然没有尽善尽美, 但以初见雏形。
+          练习Java时长2月半，喜欢唱、跳、rap
         </h2>
         <h2
           class="animate-text"
           data-aos="fade-up"
-          data-aos-delay="500"
+          data-aos-delay="700"
           style="margin-bottom: 2%"
         >
+          一望无际的迷雾中, 有人在寻找光明！很高兴遇到你, 我们一直在耕耘这么一片简单的土壤, 虽然没有尽善尽美, 但以初见雏形。<br>
           十年前我们仰望星空, 十年后我们将俯视大地, 未来的天空, 必将为我们留下一片灿烂的曙光!
         </h2>
       </div>
@@ -50,7 +51,7 @@
       <a-typography-title>作者技能条：</a-typography-title>
       <div class="center-top">
         <a-space>
-          <div class="top-info">
+          <div class="about-center-left-info">
             <a-space>
               <div>
                 <p>JAVA</p>
@@ -71,7 +72,7 @@
             </a-space>
           </div>
 
-          <div class="center-info">
+          <div class="about-center-right-info">
             <a-space>
               <div>
                 <p>HTML5/CSS3</p>
@@ -147,7 +148,7 @@
     <div class="about-foot">
       <div>
         <a-space>
-          <a-typography-title style="font-weight: lighter">
+          <a-typography-title style="font-weight: lighter;text-align: right">
             Related to
           </a-typography-title>
           <a-typography-title>
@@ -183,7 +184,7 @@
                     </a-modal>
                   </a-space>
                   <!-- 新增打赏按钮 -->
-                  <a-button style="background-color: #40a9ff; border-color: #40a9ff" type="primary" @click="showModalOfReward">
+                  <a-button style="background-color: #1b179d; border-color: #1B179DFF" type="primary" @click="showModalOfReward">
                     <GiftOutlined />
                     打赏作者
                   </a-button>
@@ -390,7 +391,7 @@ const handleOkOfReward = (e: MouseEvent) => {
 }
 
 .center-top .ant-progress {
-  width: 80% !important;
+  width: 400% !important;
   margin: 0.5rem 0 !important;
 }
 
@@ -475,6 +476,7 @@ const handleOkOfReward = (e: MouseEvent) => {
 
 /* ================= 动画效果 ================= */
 .self-introduction .animate-text {
+  color: dodgerblue;
   opacity: 0;
   transform: translateY(20px);
   animation: textReveal 6.5s cubic-bezier(0.19, 1, 0.22, 1) infinite;
@@ -522,6 +524,16 @@ const handleOkOfReward = (e: MouseEvent) => {
     0% { transform: translateY(10px) }
     100% { transform: translateY(0) }
   }
+}
+
+.about-center-left-info{
+
+  width: 576px;
+}
+.about-center-right-info{
+
+  width: 576px;
+
 }
 </style>
 
