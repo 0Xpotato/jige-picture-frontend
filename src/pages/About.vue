@@ -330,11 +330,11 @@ const handleOkOfReward = (e: MouseEvent) => {
 <style>
 /* ================= 全局基础样式 ================= */
 .aboutPage {
+  min-height: 100vh;
+  padding: 2rem;
   background: linear-gradient(to bottom right, #e6f7ff 0%, #f0faff 100%);
   background-size: cover;
   background-attachment: fixed;
-  min-height: 100vh;
-  padding: 2rem;
   font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', Arial, sans-serif;
 }
 
@@ -342,99 +342,108 @@ const handleOkOfReward = (e: MouseEvent) => {
 .about-header {
   text-align: center;
   margin-bottom: 2rem;
+}
 
-  .ant-typography-title {
-    letter-spacing: 2px;
-    margin-bottom: 0 !important;
-  }
+.about-header .ant-typography-title {
+  letter-spacing: 2px;
+  margin-bottom: 0 !important;
+}
 
-  /* 自我介绍卡片样式 */
-  .self-introduction {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 1.5rem;
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 8px;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+/* 自我介绍卡片样式 */
+.self-introduction {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
 
-    h2 {
-      font-weight: 400;
-      line-height: 1.8;
-      color: #555;
-      margin-bottom: 1.2rem !important;
-    }
-  }
+.self-introduction h2 {
+  font-weight: 400;
+  line-height: 1.8;
+  color: #555;
+  margin-bottom: 1.2rem !important;
 }
 
 /* ================= 主体内容区域样式 ================= */
 .about-center {
   max-width: 1200px;
   margin: 2rem auto;
+}
 
-  /* 技能条区域 */
-  .center-top {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    padding: 1.5rem;
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 8px;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+/* 技能条区域 */
+.center-top {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
 
-    p {
-      margin: 0.8rem 0;
-      font-weight: 500;
-      color: #666;
-    }
+.center-top p {
+  margin: 0.8rem 0;
+  font-weight: 500;
+  color: #666;
+}
 
-    .ant-progress {
-      width: 80% !important;
-      margin: 0.5rem 0 !important;
-    }
-  }
+.center-top .ant-progress {
+  width: 80% !important;
+  margin: 0.5rem 0 !important;
+}
 
-  /* 公告栏区域 */
-  .center-center {
-    margin: 2rem auto;
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 8px;
-    padding: 1.5rem;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+/* 公告栏区域 */
+.center-center {
+  margin: 2rem auto;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
 
-    .ant-comment {
-      .ant-avatar { box-shadow: 0 0 8px rgba(0, 0, 0, 0.1) }
-      .ant-card { border: 1px solid #eee }
-    }
-  }
+.center-center .ant-comment .ant-avatar {
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.center-center .ant-comment .ant-card {
+  border: 1px solid #eee;
 }
 
 /* ================= 底部区域样式 ================= */
 .about-foot {
   max-width: 1200px;
   margin: 3rem auto;
+}
 
-  .ant-space {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
+.about-foot .ant-space {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
 
-    .ant-card {
-      transition: transform 0.3s;
-      &:hover { transform: translateY(-5px) }
+.about-foot .ant-card {
+  transition: transform 0.3s;
+}
 
-      .ant-btn-link {
-        padding: 8px 12px;
-        border-radius: 6px;
-        transition: all 0.3s;
-        &:hover { background: #f5f5f5 }
-      }
+.about-foot .ant-card:hover {
+  transform: translateY(-5px);
+}
 
-      img {
-        vertical-align: middle;
-        margin-right: 8px;
-      }
-    }
-  }
+.about-foot .ant-btn-link {
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: all 0.3s;
+}
+
+.about-foot .ant-btn-link:hover {
+  background: #f5f5f5;
+}
+
+.about-foot img {
+  vertical-align: middle;
+  margin-right: 8px;
 }
 
 /* ================= 通用组件样式 ================= */
@@ -443,32 +452,32 @@ const handleOkOfReward = (e: MouseEvent) => {
   border-radius: 12px !important;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05) !important;
+}
 
-  &:hover {
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08) !important;
-    transform: translateY(-2px);
-  }
+.ant-card:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08) !important;
+  transform: translateY(-2px);
 }
 
 .ant-btn-primary {
-  border-radius: 8px !important;
-  padding: 0 20px !important;
   height: 40px !important;
+  padding: 0 20px !important;
+  border-radius: 8px !important;
   display: flex !important;
   align-items: center !important;
   transition: all 0.2s ease !important;
+}
 
-  &[type="button"]:hover {
-    opacity: 0.9;
-    transform: scale(1.02);
-  }
+.ant-btn-primary[type="button"]:hover {
+  opacity: 0.9;
+  transform: scale(1.02);
 }
 
 /* ================= 动画效果 ================= */
 .self-introduction .animate-text {
   opacity: 0;
   transform: translateY(20px);
-  animation: textReveal 1.2s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+  animation: textReveal 6.5s cubic-bezier(0.19, 1, 0.22, 1) infinite;
 }
 
 .self-introduction h2:nth-child(1) { animation-delay: 0.3s }
@@ -479,27 +488,41 @@ const handleOkOfReward = (e: MouseEvent) => {
   0% {
     opacity: 0;
     transform: translateY(20px);
-    text-shadow: 0 0 10px rgba(255,255,255,0.5);
   }
-  50% { text-shadow: 0 0 20px rgba(255,255,255,0.8) }
-  100% {
+  18% {
     opacity: 1;
     transform: translateY(0);
-    text-shadow: none;
+  }
+  95% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(0);
   }
 }
 
 /* ================= 响应式布局 ================= */
 @media (max-width: 768px) {
-  .aboutPage { padding: 1rem }
-  .self-introduction h2 { font-size: 1.1rem !important }
-  .center-top { grid-template-columns: 1fr !important }
+  .aboutPage {
+    padding: 1rem;
+  }
+
+  .self-introduction h2 {
+    font-size: 1.1rem !important;
+    animation-duration: 0.8s !important;
+  }
+
+  .center-top {
+    grid-template-columns: 1fr !important;
+  }
 
   @keyframes textReveal {
     0% { transform: translateY(10px) }
     100% { transform: translateY(0) }
   }
-  .self-introduction h2 { animation-duration: 0.8s !important }
 }
 </style>
+
 
