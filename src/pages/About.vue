@@ -147,23 +147,21 @@
           <div class="concat-information">
             <a-card hoverable title="联系方式：">
               <a-space>
-                <a-button type="primary" @click="showModal">
+                <a-button type="primary" @click="showModalOfQQ">
                 <QqOutlined />
                 QQ
               </a-button>
-<!--                todo 这里需要解决一下弹窗的冒泡-->
-              <a-modal v-model:open="open" title="添加作者QQ" @ok="handleOk">
+              <a-modal v-model:open="openOfQQ" title="添加作者QQ" @ok="handleOkOfQQ">
                 <a-image src="src/assets/QQ.png"></a-image>
               </a-modal>
-              <a-button type="primary" @click="showModal">
+              <a-button type="primary" @click="showModalOfWX">
                 <WechatFilled />
                 微信/WeChat
               </a-button>
-              <a-modal v-model:open="open" title="添加作者微信" @ok="handleOk">
+              <a-modal v-model:open="openOfWX" title="添加作者微信" @ok="handleOkOfWX">
                 <a-image src="src/assets/WX.jpg"></a-image>
               </a-modal>
               </a-space>
-
             </a-card>
           </div>
 
@@ -267,14 +265,23 @@ onMounted(() => {
 
 import { ref } from 'vue'
 
-const open = ref<boolean>(false)
+const openOfQQ = ref<boolean>(false)
+const openOfWX = ref<boolean>(false)
 
-const showModal = () => {
-  open.value = true
+const showModalOfQQ = () => {
+  openOfQQ.value = true
 }
 
-const handleOk = (e: MouseEvent) => {
-  open.value = false
+const showModalOfWX = () => {
+  openOfWX.value = true
+}
+
+const handleOkOfQQ = (e: MouseEvent) => {
+  openOfQQ.value = false
+}
+
+const handleOkOfWX = (e: MouseEvent) => {
+  openOfWX.value = false
 }
 
 </script>
