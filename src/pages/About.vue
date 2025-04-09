@@ -18,13 +18,29 @@
       <a-divider orientation="left"></a-divider>
 
       <div class="self-introduction">
-        <h2 style="margin-bottom: 2%">
+        <!-- 为每个h2添加动画类名和自定义属性 -->
+        <h2
+          class="animate-text"
+          data-aos="fade-up"
+          data-aos-delay="100"
+          style="margin-bottom: 2%"
+        >
           你好, 我是Lucky Style, 00后, 26届毕业生, 热爱计算机互联网事业
         </h2>
-        <h2 style="margin-bottom: 2%">
+        <h2
+          class="animate-text"
+          data-aos="fade-up"
+          data-aos-delay="300"
+          style="margin-bottom: 2%"
+        >
           一望无际的迷雾中, 有人在寻找光明！很高兴遇到你, 我们一直在耕耘这么一片简单的土壤, 虽然没有尽善尽美, 但以初见雏形。
         </h2>
-        <h2 style="margin-bottom: 2%">
+        <h2
+          class="animate-text"
+          data-aos="fade-up"
+          data-aos-delay="500"
+          style="margin-bottom: 2%"
+        >
           十年前我们仰望星空, 十年后我们将俯视大地, 未来的天空, 必将为我们留下一片灿烂的曙光!
         </h2>
       </div>
@@ -239,6 +255,8 @@ import relativeTime from 'dayjs/plugin/relativeTime'
 import { formatSize } from '@/utils'
 import { listSpaceLevelUsingPost } from '@/api/spaceController.ts'
 import { message } from 'ant-design-vue'
+// 新增图标引入
+import { GiftOutlined } from '@ant-design/icons-vue'
 
 const name = 'Lucky Style'
 
@@ -298,8 +316,6 @@ const handleOkOfWX = (e: MouseEvent) => {
   openOfWX.value = false
 }
 
-// 新增图标引入
-import { GiftOutlined } from '@ant-design/icons-vue'
 
 // 新增打赏相关状态
 const openOfReward = ref<boolean>(false)
@@ -312,8 +328,8 @@ const handleOkOfReward = (e: MouseEvent) => {
 </script>
 
 <style>
+/* ================= 全局基础样式 ================= */
 .aboutPage {
-  /* 修改背景为淡蓝色渐变 */
   background: linear-gradient(to bottom right, #e6f7ff 0%, #f0faff 100%);
   background-size: cover;
   background-attachment: fixed;
@@ -322,6 +338,7 @@ const handleOkOfReward = (e: MouseEvent) => {
   font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', Arial, sans-serif;
 }
 
+/* ================= 头部区域样式 ================= */
 .about-header {
   text-align: center;
   margin-bottom: 2rem;
@@ -331,6 +348,7 @@ const handleOkOfReward = (e: MouseEvent) => {
     margin-bottom: 0 !important;
   }
 
+  /* 自我介绍卡片样式 */
   .self-introduction {
     max-width: 800px;
     margin: 0 auto;
@@ -348,10 +366,12 @@ const handleOkOfReward = (e: MouseEvent) => {
   }
 }
 
+/* ================= 主体内容区域样式 ================= */
 .about-center {
   max-width: 1200px;
   margin: 2rem auto;
 
+  /* 技能条区域 */
   .center-top {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -373,6 +393,7 @@ const handleOkOfReward = (e: MouseEvent) => {
     }
   }
 
+  /* 公告栏区域 */
   .center-center {
     margin: 2rem auto;
     background: rgba(255, 255, 255, 0.95);
@@ -381,17 +402,13 @@ const handleOkOfReward = (e: MouseEvent) => {
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
 
     .ant-comment {
-      .ant-avatar {
-        box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
-      }
-
-      .ant-card {
-        border: 1px solid #eee;
-      }
+      .ant-avatar { box-shadow: 0 0 8px rgba(0, 0, 0, 0.1) }
+      .ant-card { border: 1px solid #eee }
     }
   }
 }
 
+/* ================= 底部区域样式 ================= */
 .about-foot {
   max-width: 1200px;
   margin: 3rem auto;
@@ -403,19 +420,13 @@ const handleOkOfReward = (e: MouseEvent) => {
 
     .ant-card {
       transition: transform 0.3s;
-
-      &:hover {
-        transform: translateY(-5px);
-      }
+      &:hover { transform: translateY(-5px) }
 
       .ant-btn-link {
         padding: 8px 12px;
         border-radius: 6px;
         transition: all 0.3s;
-
-        &:hover {
-          background: #f5f5f5;
-        }
+        &:hover { background: #f5f5f5 }
       }
 
       img {
@@ -426,35 +437,19 @@ const handleOkOfReward = (e: MouseEvent) => {
   }
 }
 
-/* 响应式优化 */
-@media (max-width: 768px) {
-  .aboutPage {
-    padding: 1rem;
-  }
-
-  .self-introduction h2 {
-    font-size: 1.1rem !important;
-  }
-
-  .center-top {
-    grid-template-columns: 1fr !important;
-  }
-}
-
-/* 增强卡片视觉效果 */
+/* ================= 通用组件样式 ================= */
 .ant-card {
   background: rgba(255, 255, 255, 0.95) !important;
   border-radius: 12px !important;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05) !important;
+
+  &:hover {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08) !important;
+    transform: translateY(-2px);
+  }
 }
 
-.ant-card:hover {
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08) !important;
-  transform: translateY(-2px);
-}
-
-/* 优化按钮样式 */
 .ant-btn-primary {
   border-radius: 8px !important;
   padding: 0 20px !important;
@@ -462,12 +457,49 @@ const handleOkOfReward = (e: MouseEvent) => {
   display: flex !important;
   align-items: center !important;
   transition: all 0.2s ease !important;
+
+  &[type="button"]:hover {
+    opacity: 0.9;
+    transform: scale(1.02);
+  }
 }
 
-/* 新增打赏按钮特殊样式 */
-.ant-btn-primary[type="button"]:hover {
-  opacity: 0.9;
-  transform: scale(1.02);
+/* ================= 动画效果 ================= */
+.self-introduction .animate-text {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: textReveal 1.2s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+}
+
+.self-introduction h2:nth-child(1) { animation-delay: 0.3s }
+.self-introduction h2:nth-child(2) { animation-delay: 0.6s }
+.self-introduction h2:nth-child(3) { animation-delay: 0.9s }
+
+@keyframes textReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+    text-shadow: 0 0 10px rgba(255,255,255,0.5);
+  }
+  50% { text-shadow: 0 0 20px rgba(255,255,255,0.8) }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    text-shadow: none;
+  }
+}
+
+/* ================= 响应式布局 ================= */
+@media (max-width: 768px) {
+  .aboutPage { padding: 1rem }
+  .self-introduction h2 { font-size: 1.1rem !important }
+  .center-top { grid-template-columns: 1fr !important }
+
+  @keyframes textReveal {
+    0% { transform: translateY(10px) }
+    100% { transform: translateY(0) }
+  }
+  .self-introduction h2 { animation-duration: 0.8s !important }
 }
 </style>
 
