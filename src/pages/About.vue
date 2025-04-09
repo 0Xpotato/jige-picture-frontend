@@ -145,24 +145,38 @@
       <div>
         <a-space>
           <div class="concat-information">
-            <a-card hoverable title="联系方式：">
-              <a-space>
-                <a-button type="primary" @click="showModalOfQQ">
-                <QqOutlined />
-                QQ
-              </a-button>
-              <a-modal v-model:open="openOfQQ" title="添加作者QQ" @ok="handleOkOfQQ">
-                <a-image src="src/assets/QQ.png"></a-image>
-              </a-modal>
-              <a-button type="primary" @click="showModalOfWX">
-                <WechatFilled />
-                微信/WeChat
-              </a-button>
-              <a-modal v-model:open="openOfWX" title="添加作者微信" @ok="handleOkOfWX">
-                <a-image src="src/assets/WX.jpg"></a-image>
-              </a-modal>
-              </a-space>
-            </a-card>
+            <!-- 在联系方式卡片中新增打赏按钮 -->
+            <div class="concat-information">
+              <a-card hoverable title="联系方式：">
+                <a-space>
+                  <!-- 原有按钮... -->
+                  <a-space>
+                    <a-button type="primary" @click="showModalOfQQ">
+                      <QqOutlined />
+                      QQ
+                    </a-button>
+                    <a-modal v-model:open="openOfQQ" title="添加作者QQ" @ok="handleOkOfQQ">
+                      <a-image src="src/assets/QQ.png"></a-image>
+                    </a-modal>
+                    <a-button type="primary" @click="showModalOfWX">
+                      <WechatFilled />
+                      微信/WeChat
+                    </a-button>
+                    <a-modal v-model:open="openOfWX" title="添加作者微信" @ok="handleOkOfWX">
+                      <a-image src="src/assets/WX.jpg"></a-image>
+                    </a-modal>
+                  </a-space>
+                  <!-- 新增打赏按钮 -->
+                  <a-button style="background-color: #40a9ff; border-color: #40a9ff" type="primary" @click="showModalOfReward">
+                    <GiftOutlined />
+                    打赏作者
+                  </a-button>
+                  <a-modal v-model:open="openOfReward" title="感谢支持" @ok="handleOkOfReward">
+                    <a-image src="src/assets/WXZF.jpg"></a-image>
+                  </a-modal>
+                </a-space>
+              </a-card>
+            </div>
           </div>
 
 
@@ -284,88 +298,176 @@ const handleOkOfWX = (e: MouseEvent) => {
   openOfWX.value = false
 }
 
+// 新增图标引入
+import { GiftOutlined } from '@ant-design/icons-vue'
+
+// 新增打赏相关状态
+const openOfReward = ref<boolean>(false)
+const showModalOfReward = () => {
+  openOfReward.value = true
+}
+const handleOkOfReward = (e: MouseEvent) => {
+  openOfReward.value = false
+}
 </script>
 
 <style>
 .aboutPage {
-  background-image: url("src/assets/background.jpg");
-  margin: 1% 1% 1% 1%;
-
+  /* 修改背景为淡蓝色渐变 */
+  background: linear-gradient(to bottom right, #e6f7ff 0%, #f0faff 100%);
+  background-size: cover;
+  background-attachment: fixed;
+  min-height: 100vh;
+  padding: 2rem;
+  font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', Arial, sans-serif;
 }
 
 .about-header {
-  width: 100%;
-  height: 20%;
-  margin-left: 1%;
-}
+  text-align: center;
+  margin-bottom: 2rem;
 
-.self-introduction {
-  font-size: 14px;
-  margin-bottom: 1px;
-  margin-left: 1%;
+  .ant-typography-title {
+    letter-spacing: 2px;
+    margin-bottom: 0 !important;
+  }
 
+  .self-introduction {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+
+    h2 {
+      font-weight: 400;
+      line-height: 1.8;
+      color: #555;
+      margin-bottom: 1.2rem !important;
+    }
+  }
 }
 
 .about-center {
-  width: 100%;
-  height: 30%;
-  margin-top: 1%;
-  margin-left: 1%;
+  max-width: 1200px;
+  margin: 2rem auto;
 
-}
+  .center-top {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
 
-.center-top {
-  margin-right: 3%;
-  text-align: center;
-  margin-left: 1%;
+    p {
+      margin: 0.8rem 0;
+      font-weight: 500;
+      color: #666;
+    }
 
+    .ant-progress {
+      width: 80% !important;
+      margin: 0.5rem 0 !important;
+    }
+  }
 
-}
+  .center-center {
+    margin: 2rem auto;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
 
-.center-center {
-  margin-top: 1%;
-  width: 33%;
+    .ant-comment {
+      .ant-avatar {
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+      }
 
-
-}
-
-.top-info {
-  width: 50%;
-  margin-left: 1%;
-
-
-}
-
-.center-info {
-  width: 50%;
-  margin-left: 1%;
-
-
+      .ant-card {
+        border: 1px solid #eee;
+      }
+    }
+  }
 }
 
 .about-foot {
-  width: 100%;
-  height: 10%;
-  font-size: 18px;
-  margin-top: 2%;
-  margin-bottom: 36%;
-  margin-left: 1%;
+  max-width: 1200px;
+  margin: 3rem auto;
 
+  .ant-space {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+
+    .ant-card {
+      transition: transform 0.3s;
+
+      &:hover {
+        transform: translateY(-5px);
+      }
+
+      .ant-btn-link {
+        padding: 8px 12px;
+        border-radius: 6px;
+        transition: all 0.3s;
+
+        &:hover {
+          background: #f5f5f5;
+        }
+      }
+
+      img {
+        vertical-align: middle;
+        margin-right: 8px;
+      }
+    }
+  }
 }
 
-.concat-information {
-  margin-top: 1%;
-  width: 100%;
-  margin-right: 160px;
+/* 响应式优化 */
+@media (max-width: 768px) {
+  .aboutPage {
+    padding: 1rem;
+  }
 
+  .self-introduction h2 {
+    font-size: 1.1rem !important;
+  }
+
+  .center-top {
+    grid-template-columns: 1fr !important;
+  }
 }
 
-.community {
-  margin-top: 1%;
+/* 增强卡片视觉效果 */
+.ant-card {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border-radius: 12px !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05) !important;
 }
 
-.product {
-  margin-top: 1%;
+.ant-card:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08) !important;
+  transform: translateY(-2px);
+}
+
+/* 优化按钮样式 */
+.ant-btn-primary {
+  border-radius: 8px !important;
+  padding: 0 20px !important;
+  height: 40px !important;
+  display: flex !important;
+  align-items: center !important;
+  transition: all 0.2s ease !important;
+}
+
+/* 新增打赏按钮特殊样式 */
+.ant-btn-primary[type="button"]:hover {
+  opacity: 0.9;
+  transform: scale(1.02);
 }
 </style>
 
