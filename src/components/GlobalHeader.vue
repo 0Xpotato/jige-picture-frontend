@@ -7,7 +7,7 @@
           <div class="title-bar">
             <!--图标和标题，名字随意取-->
             <img alt="logo" class="logo" src="../assets/logo.ico" />
-<!--            <div class="title">鸡哥云图库</div>-->
+            <!--            <div class="title">鸡哥云图库</div>-->
             <div class="title">吉格云图库</div>
           </div>
         </router-link>
@@ -25,8 +25,16 @@
           <div v-if="loginUserStore.loginUser.id">
             <a-dropdown>
               <ASpace>
-                <a-avatar :src="loginUserStore.loginUser.userAvatar" />
+                <a-avatar v-if="loginUserStore.loginUser.userRole==='user'" alt="user" src="src/assets/user.png" />
+                <a-avatar v-if="loginUserStore.loginUser.userRole==='vip'" alt="vip" src="src/assets/VIP.png" />
+                <a-avatar v-if="loginUserStore.loginUser.userRole==='admin'" alt="admin" src="src/assets/admin.png" />
+<!--                <div style="font-size: 12px">
+                  身份：{{ loginUserStore.loginUser.userRole }}
+                </div>-->
+<!--                <a-avatar :src="loginUserStore.loginUser.userAvatar" />-->
+<!--                <a-avatar v-if="loginUserStore.loginUser.id" alt="默认头像" src="src/assets/user.png" />-->
                 {{ loginUserStore.loginUser.userName ?? '无名' }}
+
                 <!--  ??:若前面有值就用前面的值，否则就用后面的值   -->
               </ASpace>
               <template #overlay>
@@ -62,6 +70,7 @@ import {
   ContactsOutlined,
   PlusOutlined,
   PicCenterOutlined,
+  DollarCircleFilled,
   BlockOutlined
 } from '@ant-design/icons-vue'
 import { computed, h, ref } from 'vue'
@@ -102,17 +111,23 @@ const originItems = [
     label: '空间管理',
     title: '空间管理'
   },
-/*  {
-    key: '',
-    label: h('a', { href: 'https://gitee.com/Lucky__Style', target: '_blank' }, '联系作者'),
-    title: '联系作者'
-  },*/
+  /*  {
+      key: '',
+      label: h('a', { href: 'https://gitee.com/Lucky__Style', target: '_blank' }, '联系作者'),
+      title: '联系作者'
+    },*/
+  {
+    key: '/exchange_vip',
+    icon: () => h(DollarCircleFilled),
+    label: '会员兑换',
+    title: '会员兑换'
+  },
   {
     key: '/about',
     icon: () => h(BlockOutlined),
     label: '关于作者',
     title: '关于作者'
-  },
+  }
   /*,
   {
     key: 'others',

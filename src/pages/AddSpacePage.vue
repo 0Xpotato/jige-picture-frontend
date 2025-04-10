@@ -38,7 +38,7 @@
         <a-card hoverable title="空间级别介绍">
           <a-typography-paragraph>
             * 目前仅支持开通普通版，如需升级空间，请联系
-            <a href="https://gitee.com/Lucky__Style" target="_blank">程序员鸡哥</a>
+            <a href="/About" target="_blank">程序员鸡哥</a>
 <!--            <a target="_blank" type="link">程序员鸡哥</a>-->
           </a-typography-paragraph>
           <a-typography-paragraph v-for="spaceLevel in spaceLevelList">
@@ -115,10 +115,12 @@ const handleSubmit = async (values:any) => {
   }
   if (res.data.code === 0 && res.data.data) {
     message.success('操作成功')
-    // 跳转到空间详情页
-    let path = `/space/${spaceId ?? res.data.data}`
+/*    // 跳转到空间详情页
+    let path = `/space/${spaceId ?? res.data.data}`*/
+    //跳转到空间管理页面
     router.push({
-      path,
+      // path,
+      path:'admin/spaceManage'
     })
   } else {
     message.error('操作失败，' + res.data.message)

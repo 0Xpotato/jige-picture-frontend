@@ -32,7 +32,10 @@
         </template>
         <template v-else-if="column.dataIndex === 'userRole'">
           <div v-if="record.userRole==='admin'">
-            <a-tag color="green">管理员</a-tag>
+            <a-tag color="yellow">管理员</a-tag>
+          </div>
+          <div v-else-if="record.userRole==='vip'">
+            <a-tag color="red">会员</a-tag>
           </div>
           <div v-else>
             <a-tag color="blue">普通用户</a-tag>

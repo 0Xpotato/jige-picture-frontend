@@ -14,8 +14,8 @@ import MySpacePage from '@/pages/MySpacePage.vue'
 import SpaceDetailPage from '@/pages/SpaceDetailPage.vue'
 import SearchPicturePage from '@/pages/SearchPicturePage.vue'
 import SpaceAnalyzePage from '@/pages/SpaceAnalyzePage.vue'
-import Index from '@/pages/About.vue'
 import About from '@/pages/About.vue'
+import ExchangeVipPage from '@/pages/ExchangeVipPage.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -45,11 +45,11 @@ const router = createRouter({
       name: '用户登录',
       component: UserLoginPage
     },
-/*    {
+    {
       path: '/user/register',
       name: '用户注册',
       component: UserRegisterPage
-    },*/
+    },
     {
       path: '/admin/userManage',
       name: '用户管理',
@@ -108,6 +108,11 @@ const router = createRouter({
       path: '/space_analyze',
       name: '空间分析',
       component: SpaceAnalyzePage,
+    },
+    {
+      path: '/exchange_vip',
+      name: '用户兑换会员',
+      component: ExchangeVipPage,
     },
 
 

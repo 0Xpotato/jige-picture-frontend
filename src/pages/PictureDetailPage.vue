@@ -66,7 +66,9 @@
           </a-descriptions>
           <!-- 图片操作 -->
           <a-space wrap>
-            <a-button type="primary" @click="doDownload">
+            <a-button v-if="loginUserStore.loginUser.userRole==='admin'||loginUserStore.loginUser.userRole==='vip'"
+                      type="primary"
+                      @click="doDownload">
               免费下载
               <template #icon>
                 <DownloadOutlined />

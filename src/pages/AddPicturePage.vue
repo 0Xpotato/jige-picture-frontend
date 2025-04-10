@@ -20,7 +20,7 @@
     <div v-if="picture" class="edit-bar">
       <a-space size="middle">
         <a-button :icon="h(EditOutlined)" @click="doEditPicture">编辑图片</a-button>
-        <a-button v-if="loginUserStore.loginUser.userRole==='admin'" :icon="h(FullscreenOutlined)" type="primary" @click="doImagePainting">
+        <a-button v-if="loginUserStore.loginUser.userRole==='admin'||loginUserStore.loginUser.userRole==='vip'" :icon="h(FullscreenOutlined)" type="primary" @click="doImagePainting">
           AI 扩图
         </a-button>
       </a-space>

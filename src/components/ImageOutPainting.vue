@@ -112,7 +112,7 @@ const startPolling = () => {
           clearPolling()
         } else if (taskResult.taskStatus === 'FAILED') {
           // 弹出详细的报错信息
-          message.error('扩图任务执行失败' + res.data?.data?.output?.message)
+          message.error('扩图任务执行失败' + "，图片尺寸太小或者太大")
           // 清理轮询
           clearPolling()
         }

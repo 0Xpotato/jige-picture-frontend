@@ -31,7 +31,7 @@
             </a-card-meta>
             <ShareModal ref="shareModalRef" :link="shareLink" />
             <template v-if="showOp" #actions>
-              <search-outlined v-if="loginUserStore.loginUser.id" @click="(e) => doSearch(picture, e)" />
+              <search-outlined v-if="loginUserStore.loginUser.userRole==='admin'||loginUserStore.loginUser.userRole==='vip'" @click="(e) => doSearch(picture, e)" />
               <share-alt-outlined @click="(e) => doShare(picture, e)" />
               <edit-outlined v-if="loginUserStore.loginUser.userRole==='admin'" @click="(e) => doEdit(picture, e)" />
               <delete-outlined v-if="loginUserStore.loginUser.userRole==='admin'" @click="(e) => doDelete(picture, e)" />

@@ -24,15 +24,15 @@
         <a-input-password v-model:value="formState.userPassword" placeholder="请输入密码" />
       </a-form-item>
 
-<!--      <div class="tips">
-        没有账号？
-        <RouterLink to="/user/register">去注册</RouterLink>
-      </div>-->
-
       <div class="tips">
         没有账号？
-        <a href="https://gitee.com/Lucky__Style" type="link">请联系管理员鸡哥</a>
+        <RouterLink to="/user/register">去注册</RouterLink>
       </div>
+
+<!--      <div class="tips">
+        没有账号？
+        <a href="https://gitee.com/Lucky__Style" type="link">请联系管理员鸡哥</a>
+      </div>-->
 
       <a-form-item>
         <a-button type="primary" html-type="submit" style="width: 100%">登录</a-button>

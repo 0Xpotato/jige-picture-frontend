@@ -94,55 +94,6 @@
           </div>
         </a-space>
       </div>
-
-      <div class="center-center">
-        <a-typography-title>公告栏</a-typography-title>
-        <a-comment>
-          <template #author><a style="font-size: 16px;color: orangered">吉格</a></template>
-          <template #avatar>
-            <a-avatar alt="吉格" src="public/favicon.ico" />
-          </template>
-          <template #content>
-            <p>
-              <a-card hoverable title="空间级别介绍">
-                <a-typography-paragraph>
-                  * 目前仅支持开通普通版，如需升级空间，请联系
-                  <a href="https://gitee.com/Lucky__Style" target="_blank">程序员鸡哥</a>
-                  <!--            <a target="_blank" type="link">程序员鸡哥</a>-->
-                </a-typography-paragraph>
-                <a-typography-paragraph v-for="spaceLevel in spaceLevelList">
-                  <div v-if="spaceLevel.value===0" style="color: #666666">
-                    <CrownTwoTone />
-                    {{ spaceLevel.text }}：空间大小：{{ formatSize(spaceLevel.maxSize) }}，空间数量：{{ spaceLevel.maxCount
-                    }}
-                  </div>
-                  <div v-if="spaceLevel.value===1" style="color: blueviolet">
-                    <a-space>
-                      <CrownTwoTone />
-                      <CrownTwoTone />
-                      {{ spaceLevel.text }}：空间大小：{{ formatSize(spaceLevel.maxSize)
-                      }}，空间数量：{{ spaceLevel.maxCount }}
-                    </a-space>
-                  </div>
-                  <div v-if="spaceLevel.value===2" style="color: orange">
-                    <CrownTwoTone />
-                    <CrownTwoTone />
-                    <CrownTwoTone />
-                    {{ spaceLevel.text }}：空间大小：{{ formatSize(spaceLevel.maxSize) }}，空间数量：{{ spaceLevel.maxCount
-                    }}
-                  </div>
-                </a-typography-paragraph>
-              </a-card>
-            </p>
-          </template>
-          <template #datetime>
-            <!--          <a-tooltip :title="dayjs().format('YYYY-MM-DD HH:mm:ss')">-->
-            <!--            <span>{{ dayjs().fromNow() }}</span>-->
-            <span style="font-size: 20px;color: dodgerblue">{{ publishTime1 }}</span>
-            <!--          </a-tooltip>-->
-          </template>
-        </a-comment>
-      </div>
     </div>
 
     <div class="about-foot">
@@ -395,15 +346,6 @@ const handleOkOfReward = (e: MouseEvent) => {
   margin: 0.5rem 0 !important;
 }
 
-/* 公告栏区域 */
-.center-center {
-  margin: 2rem auto;
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 8px;
-  padding: 1.5rem;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-}
-
 .center-center .ant-comment .ant-avatar {
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
 }
@@ -460,14 +402,6 @@ const handleOkOfReward = (e: MouseEvent) => {
   transform: translateY(-2px);
 }
 
-.ant-btn-primary {
-  height: 40px !important;
-  padding: 0 20px !important;
-  border-radius: 8px !important;
-  display: flex !important;
-  align-items: center !important;
-  transition: all 0.2s ease !important;
-}
 
 .ant-btn-primary[type="button"]:hover {
   opacity: 0.9;
