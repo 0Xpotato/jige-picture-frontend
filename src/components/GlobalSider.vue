@@ -2,9 +2,9 @@
   <div id="globalSider">
     <a-layout-sider
       v-if="loginUserStore.loginUser.id"
+      width="200"
       breakpoint="lg"
       collapsed-width="0"
-      width="200"
     >
       <a-menu
         v-model:selectedKeys="current"
@@ -20,11 +20,12 @@ import { computed, h, ref, watchEffect } from 'vue'
 import { PictureOutlined, TeamOutlined, UserOutlined } from '@ant-design/icons-vue'
 import { useRouter } from 'vue-router'
 import { useLoginUserStore } from '@/stores/useLoginUserStore.ts'
-
 import { listMyTeamSpaceUsingPost } from '@/api/spaceUserController.ts'
 import { message } from 'ant-design-vue'
 import { SPACE_TYPE_ENUM } from '@/constants/SPACE_TYPE_ENUM.ts'
+
 const loginUserStore = useLoginUserStore()
+
 // 固定的菜单列表
 const fixedMenuItems = [
   {
@@ -43,6 +44,7 @@ const fixedMenuItems = [
     icon: () => h(TeamOutlined),
   },
 ]
+
 const teamSpaceList = ref<API.SpaceUserVO[]>([])
 const menuItems = computed(() => {
   // 如果用户没有团队空间，则只展示固定菜单
@@ -66,6 +68,7 @@ const menuItems = computed(() => {
   }
   return [...fixedMenuItems, teamSpaceMenuGroup]
 })
+
 // 加载团队空间列表
 const fetchTeamSpaceList = async () => {
   const res = await listMyTeamSpaceUsingPost()
@@ -75,6 +78,7 @@ const fetchTeamSpaceList = async () => {
     message.error('加载我的团队空间失败，' + res.data.message)
   }
 }
+
 /**
  * 监听变量，改变时触发数据的重新加载
  */
@@ -84,6 +88,7 @@ watchEffect(() => {
     fetchTeamSpaceList()
   }
 })
+
 const router = useRouter()
 // 当前要高亮的菜单项
 const current = ref<string[]>([])
@@ -91,6 +96,7 @@ const current = ref<string[]>([])
 router.afterEach((to, from, next) => {
   current.value = [to.path]
 })
+
 // 路由跳转事件
 const doMenuClick = ({ key }) => {
   router.push(key)
@@ -99,6 +105,6 @@ const doMenuClick = ({ key }) => {
 
 <style scoped>
 #globalSider .ant-layout-sider {
-  background: none;
+    background: none;
 }
 </style>

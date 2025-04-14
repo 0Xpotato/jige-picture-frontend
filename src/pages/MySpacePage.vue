@@ -1,41 +1,43 @@
 <template>
-  <div id="mySpace">
-    <!--    <p>正在跳转中，请稍后...</p>-->
+  <div id="mySpacePage">
+    <p>正在跳转，请稍后。。。</p>
   </div>
 </template>
 
 <script lang="ts" setup>
-
 import { useRouter } from 'vue-router'
 import { useLoginUserStore } from '@/stores/useLoginUserStore.ts'
 import { listSpaceVoByPageUsingPost } from '@/api/spaceController.ts'
 import { message } from 'ant-design-vue'
 import { onMounted } from 'vue'
+import { SPACE_TYPE_ENUM } from '@/constants/SPACE_TYPE_ENUM.ts'
+
 
 const router = useRouter()
 const loginUserStore = useLoginUserStore()
 
 // 检查用户是否有个人空间
-//  在页面加载时会检查用户是否登录、是否已有空间，并使用 router.replace 重定向页面，这样点击浏览器的后退按钮时，不会回到中间页。
 const checkUserSpace = async () => {
+  // 用户未登录，则直接跳转到登录页面
   const loginUser = loginUserStore.loginUser
-  //用户没有登录，跳转到用户登录页面
   if (!loginUser?.id) {
     router.replace('/user/login')
     return
   }
-  // 获取用户空间信息
+  // 如果用户已登录，会获取该用户已创建的空间
   const res = await listSpaceVoByPageUsingPost({
     userId: loginUser.id,
     current: 1,
     pageSize: 1,
-    spaceType: 0, /*问题修复 - 兼容多个空间 , 改为获取 “私有空间” 的第一个*/
+    spaceType: SPACE_TYPE_ENUM.PRIVATE,
   })
   if (res.data.code === 0) {
+    // 如果有，则进入第一个空间
     if (res.data.data?.records?.length > 0) {
       const space = res.data.data.records[0]
       router.replace(`/space/${space.id}`)
     } else {
+      // 如果没有，则跳转到创建空间页面
       router.replace('/add_space')
       message.warn('请先创建空间')
     }
@@ -44,8 +46,7 @@ const checkUserSpace = async () => {
   }
 }
 
-
-//页面加载时先校验
+// 在页面加载时检查用户空间
 onMounted(() => {
   checkUserSpace()
 })

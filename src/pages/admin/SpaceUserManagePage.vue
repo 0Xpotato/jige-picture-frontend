@@ -54,12 +54,11 @@
 <script lang="ts" setup>
 import { onMounted, reactive, ref } from 'vue'
 import { message } from 'ant-design-vue'
-
 import {
   addSpaceUserUsingPost,
   deleteSpaceUserUsingPost,
-  editSpaceUserUsingPost, listSpaceUserVoUsingPost
-
+  editSpaceUserUsingPost,
+  listSpaceUserUsingPost,
 } from '@/api/spaceUserController.ts'
 import dayjs from 'dayjs'
 import { SPACE_ROLE_OPTIONS } from '@/constants/SPACE_TYPE_ENUM.ts'
@@ -98,7 +97,7 @@ const fetchData = async () => {
   if (!spaceId) {
     return
   }
-  const res = await listSpaceUserVoUsingPost({
+  const res = await listSpaceUserUsingPost({
     spaceId,
   })
   if (res.data.code === 0 && res.data.data) {

@@ -62,8 +62,8 @@ export async function getSpaceUserUsingPost(
   })
 }
 
-/** listSpaceUserVo POST /api/spaceUser/list */
-export async function listSpaceUserVoUsingPost(
+/** listSpaceUser POST /api/spaceUser/list */
+export async function listSpaceUserUsingPost(
   body: API.SpaceUserQueryRequest,
   options?: { [key: string]: any }
 ) {
