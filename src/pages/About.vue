@@ -123,24 +123,25 @@
                       <QqOutlined />
                       QQ
                     </a-button>
-                    <a-modal v-model:open="openOfQQ" title="添加作者QQ" @ok="handleOkOfQQ">
-                      <a-image src="src/assets/QQ.png"></a-image>
+                    <a-modal v-model:open="openOfQQ" style="width: fit-content;height: fit-content;" title="添加作者QQ" @ok="handleOkOfQQ">
+                      <img src="../assets/QQ.jpg" style="max-width: 800px;max-height: 800px"></img>
                     </a-modal>
                     <a-button type="primary" @click="showModalOfWX">
                       <WechatFilled />
                       微信/WeChat
                     </a-button>
-                    <a-modal v-model:open="openOfWX" title="添加作者微信" @ok="handleOkOfWX">
-                      <a-image src="src/assets/WX.jpg"></a-image>
+                    <a-modal v-model:open="openOfWX" style="width: fit-content;height: fit-content;" title="添加作者微信" @ok="handleOkOfWX">
+                      <img src="../assets/WX.jpg" style="max-width: 800px;max-height: 800px"></img>
                     </a-modal>
                   </a-space>
                   <!-- 新增打赏按钮 -->
-                  <a-button style="background-color: #1b179d; border-color: #1B179DFF" type="primary" @click="showModalOfReward">
+                  <a-button style="background-color: #1b179d; border-color: #1B179DFF" type="primary"
+                            @click="showModalOfReward">
                     <GiftOutlined />
                     打赏作者
                   </a-button>
-                  <a-modal v-model:open="openOfReward" title="感谢支持" @ok="handleOkOfReward">
-                    <a-image src="src/assets/WXZF.jpg"></a-image>
+                  <a-modal v-model:open="openOfReward" style="width: fit-content;height: fit-content;" title="感谢支持" @ok="handleOkOfReward">
+                    <img src="../assets/WXZF.jpg" style="max-width: 800px;max-height: 800px"></img>
                   </a-modal>
                 </a-space>
               </a-card>
@@ -416,9 +417,17 @@ const handleOkOfReward = (e: MouseEvent) => {
   animation: textReveal 6.5s cubic-bezier(0.19, 1, 0.22, 1) infinite;
 }
 
-.self-introduction h2:nth-child(1) { animation-delay: 0.3s }
-.self-introduction h2:nth-child(2) { animation-delay: 0.6s }
-.self-introduction h2:nth-child(3) { animation-delay: 0.9s }
+.self-introduction h2:nth-child(1) {
+  animation-delay: 0.3s
+}
+
+.self-introduction h2:nth-child(2) {
+  animation-delay: 0.6s
+}
+
+.self-introduction h2:nth-child(3) {
+  animation-delay: 0.9s
+}
 
 @keyframes textReveal {
   0% {
@@ -455,16 +464,21 @@ const handleOkOfReward = (e: MouseEvent) => {
   }
 
   @keyframes textReveal {
-    0% { transform: translateY(10px) }
-    100% { transform: translateY(0) }
+    0% {
+      transform: translateY(10px)
+    }
+    100% {
+      transform: translateY(0)
+    }
   }
 }
 
-.about-center-left-info{
+.about-center-left-info {
 
   width: 576px;
 }
-.about-center-right-info{
+
+.about-center-right-info {
 
   width: 576px;
 

@@ -38,8 +38,8 @@
                         <GiftOutlined />
                         微信支付
                       </a-button>
-                      <a-modal v-model:open="openOfReward" title="感谢支持" @ok="handleOkOfReward">
-                        <a-image src="src/assets/WXZF30.jpg"></a-image>
+                      <a-modal v-model:open="openOfReward" style="width: fit-content;height: fit-content;" title="感谢支持" @ok="handleOkOfReward">
+                        <img src="../assets/WXZF30.jpg" style="max-width: 800px;max-height: 800px"></img>
                       </a-modal>
                     </a-space>
                   </a-card>
@@ -104,11 +104,15 @@ import { message } from 'ant-design-vue'
 import { CrownTwoTone, GiftOutlined, QqOutlined, WechatFilled } from '@ant-design/icons-vue'
 import { formatSize } from '@/utils'
 import { listSpaceLevelUsingPost } from '@/api/spaceController.ts'
+import { useRouter } from 'vue-router'
+import Router from '@/router'
 
 // 初始化表单数据
 const formData = reactive({
   vipCode: ''
 })
+
+const router = useRouter()
 
 // 处理兑换操作
 const handleExchange = async () => {
@@ -119,6 +123,9 @@ const handleExchange = async () => {
     if (res.data.code === 0 && res.data.data) {
       message.success('兑换成功')
       formData.vipCode = '' // 清空输入框
+      await router.push({
+        path: '/'
+      })
     } else {
       message.error('兑换失败，' + res.data.message)
     }

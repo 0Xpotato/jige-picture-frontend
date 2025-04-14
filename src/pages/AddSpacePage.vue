@@ -1,7 +1,7 @@
 <template>
   <div id="addSpacePage">
     <h2 style="margin-bottom: 16px">
-      {{ route.query?.id ? '修改空间' : '创建空间' }}
+      {{ route.query?.id ? '修改' : '创建' }}{{ SPACE_TYPE_MAP[spaceType] }}
     </h2>
     <!--    输入框-->
     <a-form
@@ -39,7 +39,7 @@
           <a-typography-paragraph>
             * 目前仅支持开通普通版，如需升级空间，请联系
             <a href="/About" target="_blank">程序员鸡哥</a>
-<!--            <a target="_blank" type="link">程序员鸡哥</a>-->
+            <!--            <a target="_blank" type="link">程序员鸡哥</a>-->
           </a-typography-paragraph>
           <a-typography-paragraph v-for="spaceLevel in spaceLevelList">
             <div v-if="spaceLevel.value===0" style="color: #666666">
@@ -67,7 +67,7 @@
 
 </template>
 <script lang="ts" setup>
-import { onMounted, reactive, ref } from 'vue'
+import { computed, onMounted, reactive, ref } from 'vue'
 import {
   addSpaceUsingPost,
   getSpaceVoByIdUsingPost,
@@ -79,6 +79,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { SPACE_LEVEL_ENUM, SPACE_LEVEL_OPTIONS } from '@/constants/space.ts'
 import { formatSize } from '../utils'
 import { CrownTwoTone } from '@ant-design/icons-vue'
+import { SPACE_TYPE_ENUM, SPACE_TYPE_MAP } from '@/constants/SPACE_TYPE_ENUM.ts'
 
 
 const formData = reactive<API.SpaceAddRequest | API.SpaceEditRequest>({
@@ -97,7 +98,7 @@ const router = useRouter()
  * 根据是否有 spaceId 决定是调用更新接口还是创建接口
  * @param values
  */
-const handleSubmit = async (values:any) => {
+const handleSubmit = async (values: any) => {
   loading.value = true
   const spaceId = oldSpace.value?.id
   let res
@@ -108,19 +109,18 @@ const handleSubmit = async (values:any) => {
       ...formData
     })
   } else {
-    //创建
+// 创建
     res = await addSpaceUsingPost({
-      ...formData
+      ...formData,
+      spaceType: spaceType.value
     })
   }
   if (res.data.code === 0 && res.data.data) {
     message.success('操作成功')
-/*    // 跳转到空间详情页
-    let path = `/space/${spaceId ?? res.data.data}`*/
-    //跳转到空间管理页面
+    // 跳转到空间详情页
+    let path = `/space/${spaceId ?? res.data.data}`
     router.push({
-      // path,
-      path:'admin/spaceManage'
+      path
     })
   } else {
     message.error('操作失败，' + res.data.message)
@@ -172,6 +172,15 @@ onMounted(() => {
   if (route?.query.id)
     getOldSpace()
 })
+
+// 空间类别
+const spaceType = computed(() => {
+  if (route.query?.type) {
+    return Number(route.query.type)
+  }
+  return SPACE_TYPE_ENUM.PRIVATE
+})
+
 </script>
 <style>
 #addSpacePage {

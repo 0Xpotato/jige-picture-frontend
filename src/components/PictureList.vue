@@ -31,10 +31,16 @@
             </a-card-meta>
             <ShareModal ref="shareModalRef" :link="shareLink" />
             <template v-if="showOp" #actions>
-              <search-outlined v-if="loginUserStore.loginUser.userRole==='admin'||loginUserStore.loginUser.userRole==='vip'" @click="(e) => doSearch(picture, e)" />
+              <search-outlined
+                v-if="loginUserStore.loginUser.userRole==='admin'||loginUserStore.loginUser.userRole==='vip'"
+                @click="(e) => doSearch(picture, e)" />
               <share-alt-outlined @click="(e) => doShare(picture, e)" />
-              <edit-outlined v-if="loginUserStore.loginUser.userRole==='admin'" @click="(e) => doEdit(picture, e)" />
-              <delete-outlined v-if="loginUserStore.loginUser.userRole==='admin'" @click="(e) => doDelete(picture, e)" />
+              <!--              <edit-outlined v-if="loginUserStore.loginUser.userRole==='admin'" @click="(e) => doEdit(picture, e)" />-->
+              <edit-outlined v-if="canEdit" @click="(e) => doEdit(picture, e)" />
+              <!--              <delete-outlined v-if="loginUserStore.loginUser.userRole==='admin'"
+                                             @click="(e) => doDelete(picture, e)" />-->
+              <delete-outlined v-if="canDelete"
+                               @click="(e) => doDelete(picture, e)" />
             </template>
           </a-card>
         </a-list-item>
@@ -49,12 +55,12 @@ import {
   DeleteOutlined,
   EditOutlined,
   SearchOutlined,
-  ShareAltOutlined,
+  ShareAltOutlined
 } from '@ant-design/icons-vue'
 import { deletePictureUsingPost } from '@/api/pictureController.ts'
 import { message } from 'ant-design-vue'
 import { ref } from 'vue'
-import ShareModal from "@/components/ShareModal.vue";
+import ShareModal from '@/components/ShareModal.vue'
 import { useLoginUserStore } from '@/stores/useLoginUserStore.ts'
 
 interface Props {
@@ -62,19 +68,23 @@ interface Props {
   loading?: boolean
   showOp?: boolean
   onReload?: () => void
+  canEdit?: boolean
+  canDelete?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
   dataList: () => [],
   loading: false,
   showOp: false,
+  canEdit: false,
+  canDelete: false
 })
 
 const router = useRouter()
 // 跳转至图片详情页
 const doClickPicture = (picture: API.PictureVO) => {
   router.push({
-    path: `/picture/${picture.id}`,
+    path: `/picture/${picture.id}`
   })
 }
 
@@ -93,8 +103,8 @@ const doEdit = (picture, e) => {
     path: '/add_picture',
     query: {
       id: picture.id,
-      spaceId: picture.spaceId,
-    },
+      spaceId: picture.spaceId
+    }
   })
 }
 
@@ -111,7 +121,7 @@ const doDelete = async (picture, e) => {
     message.success('删除成功')
     props.onReload?.()
   } else {
-    message.error('删除失败，'+res.data.message)
+    message.error('删除失败，' + res.data.message)
   }
 }
 

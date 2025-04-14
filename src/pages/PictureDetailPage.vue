@@ -77,7 +77,7 @@
             <a-button v-if="canEdit" :icon="h(EditOutlined)" type="default" @click="doEdit">
               编辑
             </a-button>
-            <a-button v-if="canEdit" :icon="h(DeleteOutlined)" danger @click="doDelete">
+            <a-button v-if="canDelete" :icon="h(DeleteOutlined)" danger @click="doDelete">
               删除
             </a-button>
           </a-space>
@@ -95,6 +95,7 @@ import { DeleteOutlined, DownloadOutlined, EditOutlined } from '@ant-design/icon
 import { useLoginUserStore } from '@/stores/useLoginUserStore.ts'
 import { useRouter } from 'vue-router'
 import { downloadImage, formatSize, toHexColor } from '@/utils'
+import { SPACE_PERMISSION_ENUM } from '@/constants/SPACE_TYPE_ENUM.ts'
 
 interface Props {
   id: string | number
@@ -105,7 +106,7 @@ const picture = ref<API.PictureVO>({})
 
 const loginUserStore = useLoginUserStore()
 
-// 是否具有编辑权限
+/*// 是否具有编辑权限
 const canEdit = computed(() => {
   const loginUser = loginUserStore.loginUser
   // 未登录不可编辑
@@ -115,7 +116,7 @@ const canEdit = computed(() => {
   // 仅本人或管理员可编辑
   const user = picture.value.user || {}
   return loginUser.id === user.id || loginUser.userRole === 'admin'
-})
+})*/
 
 // 获取图片详情
 const fetchPictureDetail = async () => {
@@ -167,6 +168,17 @@ const doDownload = () => {
   //下载JPG高清图
   // downloadImage(picture.value.jpgUrl)
 }
+
+// 通用权限检查函数
+function createPermissionChecker(permission: string) {
+  return computed(() => {
+    return (picture.value.permissionList ?? []).includes(permission)
+  })
+}
+
+// 定义权限检查
+const canEdit = createPermissionChecker(SPACE_PERMISSION_ENUM.PICTURE_EDIT)
+const canDelete = createPermissionChecker(SPACE_PERMISSION_ENUM.PICTURE_DELETE)
 
 </script>
 

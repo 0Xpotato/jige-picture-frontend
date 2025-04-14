@@ -62,12 +62,16 @@ interface Props {
   loading?: boolean
   showOp?: boolean
   onReload?: () => void
+  canEdit?: boolean
+  canDelete?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
   dataList: () => [],
   loading: false,
-  showOp: false
+  showOp: false,
+  canEdit: false,
+  canDelete: false
 })
 
 const router = useRouter()

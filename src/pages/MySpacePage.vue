@@ -1,6 +1,6 @@
 <template>
   <div id="mySpace">
-<!--    <p>正在跳转中，请稍后...</p>-->
+    <!--    <p>正在跳转中，请稍后...</p>-->
   </div>
 </template>
 
@@ -28,7 +28,8 @@ const checkUserSpace = async () => {
   const res = await listSpaceVoByPageUsingPost({
     userId: loginUser.id,
     current: 1,
-    pageSize: 1
+    pageSize: 1,
+    spaceType: 0, /*问题修复 - 兼容多个空间 , 改为获取 “私有空间” 的第一个*/
   })
   if (res.data.code === 0) {
     if (res.data.data?.records?.length > 0) {

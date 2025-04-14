@@ -20,19 +20,29 @@
           @click="doMenuClick"
         />
       </a-col>
-      <a-col flex="120px">
+      <a-col flex="80px">
         <div class="user-login-status">
           <div v-if="loginUserStore.loginUser.id">
             <a-dropdown>
               <ASpace>
-                <a-avatar v-if="loginUserStore.loginUser.userRole==='user'" alt="user" src="src/assets/user.png" />
-                <a-avatar v-if="loginUserStore.loginUser.userRole==='vip'" alt="vip" src="src/assets/VIP.png" />
-                <a-avatar v-if="loginUserStore.loginUser.userRole==='admin'" alt="admin" src="src/assets/admin.png" />
-<!--                <div style="font-size: 12px">
-                  身份：{{ loginUserStore.loginUser.userRole }}
-                </div>-->
-<!--                <a-avatar :src="loginUserStore.loginUser.userAvatar" />-->
-<!--                <a-avatar v-if="loginUserStore.loginUser.id" alt="默认头像" src="src/assets/user.png" />-->
+                <div v-if="loginUserStore.loginUser.userRole==='user'">
+                  <SmileTwoTone />
+                </div>
+                <div v-if="loginUserStore.loginUser.userRole==='vip'">
+                  <CrownTwoTone />
+                </div>
+                <div v-if="loginUserStore.loginUser.userRole==='admin'">
+                  <CrownOutlined />
+                </div>
+
+                <!--                <a-avatar v-if="loginUserStore.loginUser.userRole==='user'" alt="user" src="@/user.png" />
+                                <a-avatar v-if="loginUserStore.loginUser.userRole==='vip'" alt="vip" src="@/vip.png" />
+                                <a-avatar v-if="loginUserStore.loginUser.userRole==='admin'" alt="admin" src="@/admin.png" />-->
+                <!--                <div style="font-size: 12px">
+                                  身份：{{ loginUserStore.loginUser.userRole }}
+                                </div>-->
+                <!--                <a-avatar :src="loginUserStore.loginUser.userAvatar" />-->
+                <!--                <a-avatar v-if="loginUserStore.loginUser.id" alt="默认头像" src="src/assets/user.png" />-->
                 {{ loginUserStore.loginUser.userName ?? '无名' }}
 
                 <!--  ??:若前面有值就用前面的值，否则就用后面的值   -->
@@ -71,6 +81,9 @@ import {
   PlusOutlined,
   PicCenterOutlined,
   DollarCircleFilled,
+  CrownTwoTone,
+  CrownOutlined,
+  SmileTwoTone,
   BlockOutlined
 } from '@ant-design/icons-vue'
 import { computed, h, ref } from 'vue'

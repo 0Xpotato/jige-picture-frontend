@@ -16,6 +16,7 @@ import SearchPicturePage from '@/pages/SearchPicturePage.vue'
 import SpaceAnalyzePage from '@/pages/SpaceAnalyzePage.vue'
 import About from '@/pages/About.vue'
 import ExchangeVipPage from '@/pages/ExchangeVipPage.vue'
+import SpaceUserManagePage from '@/pages/admin/SpaceUserManagePage.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -113,6 +114,11 @@ const router = createRouter({
       path: '/exchange_vip',
       name: '用户兑换会员',
       component: ExchangeVipPage,
+    },
+    {
+      path: '/spaceUserManage/:id',
+      name: '空间成员管理',
+      component: SpaceUserManagePage,
     },
 
 

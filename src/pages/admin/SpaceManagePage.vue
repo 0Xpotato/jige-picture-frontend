@@ -18,6 +18,15 @@
                   placeholder="选择空间级别">
         </a-select>
       </a-form-item>
+      <a-form-item label="空间类别" name="spaceType">
+        <a-select
+          v-model:value="searchParams.spaceType"
+          :options="SPACE_TYPE_OPTIONS"
+          allow-clear
+          placeholder="请输入空间类别"
+          style="min-width: 180px"
+        />
+      </a-form-item>
       <a-form-item label="用户id" name="userId">
         <a-input v-model:value="searchParams.userId" allow-clear placeholder="输入用户id">
         </a-input>
@@ -58,6 +67,11 @@
         <template v-if="column.dataIndex === 'tags'">
           <a-tag v-for="tag in JSON.parse(record.tags || '[]')" :key="tag" style="color: orange">{{ tag }}</a-tag>
         </template>
+        <!-- 空间类别 -->
+        <template v-if="column.dataIndex === 'spaceType'">
+          <a-tag>{{ SPACE_TYPE_MAP[record.spaceType] }}</a-tag>
+        </template>
+
         <!-- 空间信息 -->
         <template v-if="column.dataIndex==='spaceUseInfo'">
           <div>大小：{{ formatSize(record.totalSize) }}/{{ formatSize(record.maxSize) }}</div>
@@ -109,6 +123,7 @@ import { deleteSpaceUsingPost, listSpaceByPageUsingPost } from '@/api/spaceContr
 import { SPACE_LEVEL_MAP, SPACE_LEVEL_OPTIONS } from '../../constants/space.ts'
 import { format } from 'pathe'
 import { formatSize } from '../../utils'
+import { SPACE_TYPE_MAP, SPACE_TYPE_OPTIONS } from '@/constants/SPACE_TYPE_ENUM.ts'
 
 const columns = [
   {
@@ -123,6 +138,10 @@ const columns = [
   {
     title: '空间级别',
     dataIndex: 'spaceLevel'
+  },
+  {
+    title: '空间类别',
+    dataIndex: 'spaceType'
   },
   {
     title: '使用情况',

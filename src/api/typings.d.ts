@@ -438,6 +438,7 @@ declare namespace API {
     introduction?: string
     jpgUrl?: string
     name?: string
+    permissionList?: string[]
     picColor?: string
     picFormat?: string
     picHeight?: number
@@ -626,6 +627,7 @@ declare namespace API {
     id?: number
     maxCount?: number
     maxSize?: number
+    permissionList?: string[]
     spaceLevel?: number
     spaceName?: string
     spaceType?: number
